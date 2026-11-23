@@ -29,5 +29,6 @@
     "Sarawak",
     "Labuan"
   ],
-  "_note": "Prices are in sen (1500 = RM15). Checkout refuses to run if a shipping price is null."
+  "_note": "Prices are in sen (1500 = RM15). Orders with a subtotal at or above freeOver ship free to every zone. Checkout refuses to run if a shipping price is null.",
+  "freeOver": 4500
 }

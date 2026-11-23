@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Flower Clicker · Rekaforma</title>
-<meta name="description" content="The Flower Clicker: a 3D printed flower with a mechanical keyboard switch inside. Sunflower, Sakura or Daisy. RM15.">
+<meta name="description" content="The Flower Clicker: a 3D printed flower with a mechanical keyboard switch inside. Sunflower, Sakura or Daisy. RM15, free delivery over RM45.">
 <meta name="theme-color" content="#eeeae3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,16 +14,15 @@
 </head>
 <body>
 
-<div class="announce">Printed to order in Kuala Lumpur · Ships in [X] working days</div>
+<div class="announce">Free delivery on orders over RM45 · Printed to order in Kuala Lumpur</div>
 
 <header class="header">
   <div class="wrap">
     <button class="text-btn menu-btn" type="button" aria-expanded="false">Menu</button>
     <nav class="nav" aria-label="Main">
       <a href="product.html" aria-current="page">Shop</a>
-      <a href="index.html#series-01">Series 01</a>
       <a href="index.html#approach">Studio</a>
-      <a href="index.html#next">Upcoming<span class="soon">02</span></a>
+      <a href="help.html">Help</a>
     </nav>
     <a class="brand" href="index.html" aria-label="Rekaforma home"><span class="logo" aria-hidden="true"></span></a>
     <div class="tools">
@@ -37,21 +36,26 @@
 
   <div class="pdp">
     <div class="gallery">
-      <div class="viewer" id="viewer" role="img" aria-label="Flower Clicker, Sunflower. Drag to turn it around.">
-        <img id="viewImg" src="assets/img/studio/card_sun.webp" alt="" width="1200" height="1500" class="cover">
+      <div class="viewer" id="viewer">
+        <img id="viewImg" src="assets/img/studio/press_sun.webp" alt="Flower Clicker, Sunflower, on a stone plinth" width="1200" height="1500" class="cover">
+        <div class="scale" id="scale" hidden>
+          <img id="scaleImg" src="assets/img/flower/sun_top.webp" alt="" width="1200" height="1200">
+          <div class="card-outline"><span>Bank card<br>85.6 × 54 mm</span></div>
+          <div class="dim" id="dimFlower"><span id="dimLabel">48 mm</span></div>
+          <div class="dim" style="left:42%;width:52%"><span>85.6 mm</span></div>
+          <span class="note">Drawn to scale</span>
+        </div>
         <span class="loading" id="loading"></span>
-        <span class="hint" aria-hidden="true">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 8c0-2 2.7-3.5 6-3.5S14 6 14 8s-2.7 3.5-6 3.5"/><path d="M6 9.5L8 11.5 6 13.5"/></svg>
-          Drag to turn
-        </span>
+        <span class="hint" id="hint" aria-hidden="true">Press the flower</span>
+        <span class="counter" id="counter" hidden></span>
       </div>
       <div class="thumbs" role="group" aria-label="Views">
-        <button type="button" data-v="studio" aria-pressed="true" aria-label="On a plinth"><img class="cover" alt="" src="assets/img/studio/card_sun.webp"></button>
+        <button type="button" data-v="press" aria-pressed="true" aria-label="Press view"><img class="cover" alt="" src="assets/img/studio/press_sun.webp"></button>
         <button type="button" class="t360" data-v="spin" aria-pressed="false">360°</button>
-        <button type="button" data-v="top" aria-pressed="false" aria-label="Front"><img alt="" src="assets/img/flower/sun_top.webp"></button>
-        <button type="button" data-v="hero" aria-pressed="false" aria-label="Angle"><img alt="" src="assets/img/flower/sun_hero.webp"></button>
-        <button type="button" data-v="side" aria-pressed="false" aria-label="Side"><img alt="" src="assets/img/flower/sun_side.webp"></button>
-        <button type="button" data-v="exploded" aria-pressed="false" aria-label="Parts"><img alt="" src="assets/img/flower/sun_exploded.webp"></button>
+        <button type="button" data-v="top" aria-pressed="false" aria-label="Front view"><img alt="" src="assets/img/flower/sun_top.webp"></button>
+        <button type="button" data-v="side" aria-pressed="false" aria-label="Side view"><img alt="" src="assets/img/flower/sun_side.webp"></button>
+        <button type="button" data-v="exploded" aria-pressed="false" aria-label="Parts view"><img alt="" src="assets/img/flower/sun_exploded.webp"></button>
+        <button type="button" class="t360" data-v="scale" aria-pressed="false">Size</button>
       </div>
     </div>
 
@@ -61,7 +65,7 @@
         <h1>Flower Clicker</h1>
       </div>
       <div class="price" id="pPrice">RM15</div>
-      <p class="body" id="pLine" style="font-size:16px">A mechanical keyboard switch set inside a flower. Press the petals and the face travels 4 mm, then springs back. The same flower on both sides, with a loop for your keys.</p>
+      <p class="body" style="font-size:16px">A mechanical keyboard switch set inside a flower. Press the petals and the face travels 4 mm with a click, then springs back. The same flower on both sides, with a loop for your keys.</p>
 
       <div class="opt">
         <div class="opt-label"><span>Flower</span><b id="optName" style="font-weight:500">Sunflower</b></div>
@@ -81,29 +85,34 @@
         <button class="btn" type="button" id="addBtn">Add to bag · RM15</button>
       </div>
 
-      <div class="hear">
-        <p>Hold the button to hear the switch.</p>
-        <button type="button" id="hearBtn" aria-label="Press to hear the switch click">PRESS</button>
-      </div>
+      <ul class="assure">
+        <li>Delivery RM7 in Peninsular Malaysia, RM15 to Sabah, Sarawak and Labuan</li>
+        <li>Free delivery on orders over RM45, or all three flowers</li>
+        <li>Ships in [X] working days from Kuala Lumpur</li>
+        <li>Pay with FPX online banking, card or GrabPay</li>
+      </ul>
 
       <div class="acc">
         <details open>
           <summary>Dimensions</summary>
           <div class="content">
             <dl class="spec">
-              <dt>Diameter</dt><dd>48 mm</dd>
+              <dt>Diameter</dt><dd id="sDia">48 mm</dd>
               <dt>Depth, at rest / pressed</dt><dd id="sThick">29.1 / 25.1 mm</dd>
               <dt>Height with key loop</dt><dd>54 mm</dd>
               <dt>Key travel</dt><dd>4.0 mm</dd>
-              <dt>Weight</dt><dd>[X] g</dd>
             </dl>
           </div>
+        </details>
+        <details>
+          <summary>What's in the box</summary>
+          <div class="content"><p>[What ships in the box: the clicker, a key ring if included, and the packaging.]</p></div>
         </details>
         <details>
           <summary>Materials and construction</summary>
           <div class="content">
             <p>Five parts printed in PLA, one colour each: front petals, back petals, two centres and a thin band. The centres are glued into their own pockets, so every colour edge is crisp and nothing is painted.</p>
-            <p>Inside is a standard MX-style mechanical switch ([switch type]).</p>
+            <p>Inside is a standard MX-style mechanical keyboard switch.</p>
           </div>
         </details>
         <details>
@@ -112,14 +121,14 @@
         </details>
         <details>
           <summary>Delivery and returns</summary>
-          <div class="content"><p>[Delivery rates, areas and return policy go here.]</p></div>
+          <div class="content"><p>Rates, timing and our return policy are on the <a href="help.html#delivery">help page</a>.</p></div>
         </details>
       </div>
     </div>
   </div>
 
   <section class="section" style="padding-top:clamp(56px,8vw,112px)">
-    <div class="rule-head"><h2 class="h2">Complete the series</h2></div>
+    <div class="rule-head"><div style="display:grid;gap:12px"><span class="label">All three ship free</span><h2 class="h2">Complete the set</h2></div></div>
     <div class="grid-3" id="also"></div>
   </section>
 </main>
@@ -133,9 +142,9 @@
   <div class="wrap">
     <div class="top">
       <div class="sig" aria-label="Rekaforma"><span class="logo-mark" aria-hidden="true"></span><span class="logo" aria-hidden="true"></span></div>
-      <div><h4>Shop</h4><ul><li><a href="product.html">Series 01</a></li><li><a href="index.html#next">Upcoming</a></li></ul></div>
-      <div><h4>Help</h4><ul><li><a href="#">Delivery</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact</a></li></ul></div>
-      <div><h4>Follow</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li></ul></div>
+      <div><h4>Shop</h4><ul><li><a href="#sun">Sunflower</a></li><li><a href="#sak">Sakura</a></li><li><a href="#dai">Daisy</a></li></ul></div>
+      <div><h4>Help</h4><ul><li><a href="help.html#delivery">Delivery</a></li><li><a href="help.html#returns">Returns</a></li><li><a href="help.html#contact">Contact</a></li></ul></div>
+      <div><h4>Follow</h4><ul><li><a href="[instagram link]">Instagram</a></li><li><a href="[tiktok link]">TikTok</a></li></ul></div>
     </div>
     <div class="bottom"><span>© <span data-year>2026</span> Rekaforma, Kuala Lumpur</span><span>Designed with purpose</span></div>
   </div>
@@ -147,57 +156,103 @@
   'use strict';
   var FRAMES = 36, FL = ['sun', 'sak', 'dai'];
   var thick = { sun: '29.1 / 25.1 mm', sak: '30.0 / 26.0 mm', dai: '28.9 / 24.9 mm' };
-  var state = { f: 'sun', view: 'studio', frame: 0, qty: 1 };
-  var viewer = document.getElementById('viewer'), img = document.getElementById('viewImg'), loading = document.getElementById('loading');
-  var cache = {};
+  /* real diameter, and how much of its front image the flower fills, for the scale drawing */
+  var size = { sun: [48, .6233], sak: [47, .6333], dai: [48, .6517] };
+  var CARD = 0.52, CARD_MM = 85.6, FLOWER_X = 0.21;
+  var HINT = { press: 'Press the flower', spin: 'Drag to turn' };
+
+  var state = { f: 'sun', view: 'press', frame: 0, qty: 1, clicks: 0 };
+  var viewer = document.getElementById('viewer'), img = document.getElementById('viewImg');
+  var scale = document.getElementById('scale'), hint = document.getElementById('hint'), counter = document.getElementById('counter');
+  var loading = document.getElementById('loading'), cache = {};
+
   function P() { return RF.CATALOG[RF.idFor(state.f)]; }
-  function src(f, i) { return 'assets/img/spin/' + f + '_' + String(i).padStart(2, '0') + '.webp'; }
-  function viewSrc(f, v) { return v === 'studio' ? 'assets/img/studio/card_' + f + '.webp' : 'assets/img/flower/' + f + '_' + v + '.webp'; }
-  function preload(f) {
+  function spinSrc(f, i) { return 'assets/img/spin/' + f + '_' + String(i).padStart(2, '0') + '.webp'; }
+  function viewSrc(f, v, down) { return v === 'press' ? 'assets/img/studio/press_' + f + (down ? '_pressed' : '') + '.webp' : 'assets/img/flower/' + f + '_' + v + '.webp'; }
+  function warm(urls) { urls.forEach(function (u) { var i = new Image(); i.src = u; }); }
+  function preloadSpin(f) {
     if (cache[f]) return;
     cache[f] = []; var done = 0; loading.textContent = 'Loading';
     for (var i = 0; i < FRAMES; i++) {
       var im = new Image();
       im.onload = im.onerror = function () { if (++done === FRAMES && state.f === f) loading.textContent = ''; };
-      im.src = src(f, i); cache[f].push(im);
+      im.src = spinSrc(f, i); cache[f].push(im);
     }
   }
+
   function paint() {
-    img.src = state.view === 'spin' ? src(state.f, state.frame) : viewSrc(state.f, state.view);
-    img.classList.toggle('cover', state.view === 'studio');
-    viewer.classList.toggle('still', state.view !== 'spin');
+    var v = state.view;
+    scale.hidden = v !== 'scale';
+    img.hidden = v === 'scale';
+    if (v === 'spin') img.src = spinSrc(state.f, state.frame);
+    else if (v !== 'scale') img.src = viewSrc(state.f, v);
+    img.classList.toggle('cover', v === 'press');
+    img.alt = P().name + (v === 'press' ? ', on a stone plinth' : v === 'spin' ? ', turning' : '');
+    viewer.classList.toggle('pressable', v === 'press');
+    viewer.setAttribute('role', v === 'press' ? 'button' : 'img');
+    viewer.tabIndex = v === 'press' ? 0 : -1;
+    viewer.setAttribute('aria-label', v === 'press' ? 'Press the flower to hear the switch' : v === 'spin' ? P().name + ', drag to turn it around' : v === 'scale' ? P().name + ', ' + size[state.f][0] + ' mm across, drawn next to an 85.6 mm bank card' : P().name);
+    hint.textContent = HINT[v] || '';
+    hint.hidden = !HINT[v] || (v === 'spin' && viewer.classList.contains('used'));
+    counter.hidden = v !== 'press' || !state.clicks;
+    if (v === 'scale') paintScale();
+  }
+  function paintScale() {
+    var s = size[state.f], realW = s[0] * CARD / CARD_MM, imgW = realW / s[1];
+    var si = document.getElementById('scaleImg');
+    si.src = 'assets/img/flower/' + state.f + '_top.webp';
+    si.style.width = (imgW * 100) + '%';
+    si.style.left = ((FLOWER_X - imgW / 2) * 100) + '%';
+    var d = document.getElementById('dimFlower');
+    d.style.left = ((FLOWER_X - realW / 2) * 100) + '%';
+    d.style.width = (realW * 100) + '%';
+    document.getElementById('dimLabel').textContent = s[0] + ' mm';
   }
   function paintButtons() {
     var total = RF.rm(P().price * state.qty);
     document.getElementById('addBtn').textContent = 'Add to bag · ' + total;
     document.getElementById('stickyAdd').textContent = 'Add · ' + total;
   }
+
   function setFlower(f, push) {
     if (FL.indexOf(f) < 0) return;
     state.f = f; var p = P();
     document.getElementById('optName').textContent = p.short;
     document.getElementById('stickyName').textContent = p.short;
-    document.getElementById('crumbName').textContent = 'Flower Clicker, ' + p.short;
+    document.getElementById('crumbName').textContent = p.name;
     document.getElementById('pPrice').textContent = RF.rm(p.price);
     document.getElementById('sThick').textContent = thick[f];
-    viewer.setAttribute('aria-label', p.name + '. Drag to turn it around.');
+    document.getElementById('sDia').textContent = size[f][0] + ' mm';
     document.querySelectorAll('.variants button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.f === f); });
-    document.querySelectorAll('.thumbs button:not(.t360) img').forEach(function (im) { im.src = viewSrc(f, im.parentNode.dataset.v); });
+    document.querySelectorAll('.thumbs button img').forEach(function (im) { im.src = viewSrc(f, im.parentNode.dataset.v); });
     document.title = p.name + ' · Rekaforma';
     if (push) { try { history.replaceState(null, '', '#' + f); } catch (e) {} }
+    warm([viewSrc(f, 'press', true)]);
+    if (state.view === 'spin') preloadSpin(f);
     paint(); paintButtons(); renderAlso();
   }
-
   function setView(v) {
     state.view = v;
     document.querySelectorAll('.thumbs button').forEach(function (x) { x.setAttribute('aria-pressed', x.dataset.v === v); });
-    if (v === 'spin') preload(state.f);
+    if (v === 'spin') preloadSpin(state.f);
     paint();
   }
-  var dragging = false, lastX = 0, acc = 0;
+
+  /* one pointer handler: press in press view, drag in 360 view */
+  var dragging = false, pressing = false, lastX = 0, acc = 0;
+  function pressDown() {
+    if (pressing) return; pressing = true;
+    viewer.classList.add('down'); img.src = viewSrc(state.f, 'press', true); RF.click(true);
+  }
+  function pressUp() {
+    if (!pressing) return; pressing = false;
+    viewer.classList.remove('down'); img.src = viewSrc(state.f, 'press'); RF.click(false);
+    state.clicks++; counter.textContent = state.clicks + (state.clicks === 1 ? ' click' : ' clicks'); counter.hidden = false; hint.hidden = true;
+  }
   viewer.addEventListener('pointerdown', function (e) {
-    if (state.view !== 'spin') setView('spin');
-    dragging = true; lastX = e.clientX; viewer.classList.add('used');
+    if (state.view === 'press') { e.preventDefault(); pressDown(); return; }
+    if (state.view !== 'spin') return;
+    dragging = true; lastX = e.clientX; viewer.classList.add('used'); hint.hidden = true;
     try { viewer.setPointerCapture(e.pointerId); } catch (err) {}
   });
   viewer.addEventListener('pointermove', function (e) {
@@ -205,12 +260,18 @@
     acc += e.clientX - lastX; lastX = e.clientX;
     var step = viewer.clientWidth / 48;
     while (Math.abs(acc) >= step) { state.frame = (state.frame + (acc > 0 ? -1 : 1) + FRAMES) % FRAMES; acc += acc > 0 ? -step : step; }
-    paint();
+    img.src = spinSrc(state.f, state.frame);
   });
-  ['pointerup', 'pointercancel'].forEach(function (ev) { viewer.addEventListener(ev, function () { dragging = false; }); });
+  window.addEventListener('pointerup', function () { dragging = false; pressUp(); });
+  viewer.addEventListener('pointercancel', function () { dragging = false; pressUp(); });
+  viewer.addEventListener('pointerleave', function () { if (pressing) pressUp(); });
+  /* keyboard: the press view is a button for screen readers and keyboards */
+  viewer.addEventListener('keydown', function (e) { if (state.view === 'press' && (e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); pressDown(); } });
+  viewer.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Enter') pressUp(); });
+
   setInterval(function () {
     if (RF.still || viewer.classList.contains('used') || state.view !== 'spin') return;
-    state.frame = (state.frame + 1) % FRAMES; paint();
+    state.frame = (state.frame + 1) % FRAMES; img.src = spinSrc(state.f, state.frame);
   }, 140);
 
   document.querySelectorAll('.thumbs button').forEach(function (b) { b.addEventListener('click', function () { setView(b.dataset.v); }); });
@@ -223,15 +284,6 @@
   document.getElementById('addBtn').onclick = add;
   document.getElementById('stickyAdd').onclick = add;
 
-  /* hold to hear the switch */
-  var hb = document.getElementById('hearBtn'), down = false;
-  function press() { if (down) return; down = true; hb.classList.add('down'); RF.click(true); }
-  function release() { if (!down) return; down = false; hb.classList.remove('down'); RF.click(false); }
-  hb.addEventListener('pointerdown', function (e) { e.preventDefault(); press(); });
-  window.addEventListener('pointerup', release); hb.addEventListener('pointerleave', release);
-  hb.addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); press(); } });
-  hb.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Enter') release(); });
-
   var sticky = document.getElementById('stickyBuy');
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (es) { sticky.classList.toggle('on', !es[0].isIntersecting && es[0].boundingClientRect.top < 0); })
@@ -241,11 +293,11 @@
   function renderAlso() {
     var box = document.getElementById('also'); box.innerHTML = '';
     FL.filter(function (k) { return k !== state.f; }).forEach(function (k) {
-      var p = RF.CATALOG[RF.idFor(k)];
+      var id = RF.idFor(k), p = RF.CATALOG[id];
       var a = document.createElement('article'); a.className = 'card';
       a.innerHTML = '<a class="media" href="#' + k + '" tabindex="-1" aria-hidden="true"><img class="main" src="assets/img/studio/card_' + k + '.webp" alt="" loading="lazy">' +
         '<img class="alt" src="assets/img/flower/' + k + '_top.webp" alt="" loading="lazy"></a>' +
-        '<div><div class="row"><h3><a href="#' + k + '">' + p.name + '</a></h3><span class="price">' + RF.rm(p.price) + '</span></div><p>' + p.line + '</p></div>';
+        '<div><div class="row"><h3><span class="dot" style="background:' + p.dot + '" aria-hidden="true"></span><a href="#' + k + '">' + p.short + '</a></h3><span class="price">' + RF.rm(p.price) + '</span></div><p>' + p.line + '</p></div>';
       box.appendChild(a);
     });
   }

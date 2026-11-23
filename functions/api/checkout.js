@@ -38,6 +38,8 @@ export async function onRequestPost({ request, env }) {
   }
   const zone = config.eastStates.includes(c.state) ? 'east' : 'west';
   const ship = config.shipping[zone];
+  const subtotal = lines.reduce((sum, { p, qty }) => sum + p.price * qty, 0);
+  const free = config.freeOver != null && subtotal >= config.freeOver;
 
   const f = new URLSearchParams();
   f.set('mode', 'payment');
@@ -53,8 +55,8 @@ export async function onRequestPost({ request, env }) {
     f.set(`line_items[${i}][price_data][product_data][name]`, p.name);
   });
   f.set('shipping_options[0][shipping_rate_data][type]', 'fixed_amount');
-  f.set('shipping_options[0][shipping_rate_data][display_name]', `Shipping · ${ship.label}`);
-  f.set('shipping_options[0][shipping_rate_data][fixed_amount][amount]', String(ship.price));
+  f.set('shipping_options[0][shipping_rate_data][display_name]', free ? `Free delivery · ${ship.label}` : `Delivery · ${ship.label}`);
+  f.set('shipping_options[0][shipping_rate_data][fixed_amount][amount]', free ? '0' : String(ship.price));
   f.set('shipping_options[0][shipping_rate_data][fixed_amount][currency]', config.currency);
 
   const addr = {

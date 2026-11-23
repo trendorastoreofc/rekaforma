@@ -13,6 +13,9 @@
     'flower-sak': { flower: 'sak', name: 'Flower Clicker, Sakura', short: 'Sakura', price: 1500, tint: '#dcd6cb', dot: '#f4b6c8', line: 'Blush petals, deep pink centre, white band' },
     'flower-dai': { flower: 'dai', name: 'Flower Clicker, Daisy', short: 'Daisy', price: 1500, tint: '#dcd6cb', dot: '#f4f1e8', line: 'White petals, yellow centre, green band' }
   };
+  /* display copies of shop-config.json; the server recalculates delivery itself */
+  RF.FREE_OVER = 4500;
+  RF.SHIP = { west: 700, east: 1500 };
   RF.idFor = function (f) { return 'flower-' + f; };
   RF.img = function (id, view) { return 'assets/img/flower/' + RF.CATALOG[id].flower + '_' + (view || 'top') + '.webp'; };
   RF.rm = function (sen) { return 'RM' + (sen / 100).toFixed(sen % 100 ? 2 : 0); };
@@ -77,14 +80,25 @@
       return;
     }
     body.innerHTML = items.map(function (l) { return RF.lineHTML(l, true); }).join('');
+    var sub = RF.cart.subtotal(), left = RF.FREE_OVER - sub, pct = Math.min(100, Math.round(sub / RF.FREE_OVER * 100));
     foot.innerHTML =
-      '<dl class="totals"><dt>Subtotal</dt><dd>' + RF.rm(RF.cart.subtotal()) + '</dd><dt class="small">Delivery</dt><dd class="small">Calculated at checkout</dd></dl>' +
+      '<div class="progress" role="status"><p>' + (left > 0 ? 'Add <b>' + RF.rm(left) + '</b> more for free delivery.' : 'Your order ships free.') + '</p>' +
+      '<span class="bar" aria-hidden="true"><i style="width:' + pct + '%"></i></span></div>' +
+      '<dl class="totals"><dt>Subtotal</dt><dd>' + RF.rm(sub) + '</dd><dt class="small">Delivery</dt><dd class="small">' + (left > 0 ? 'From ' + RF.rm(RF.SHIP.west) + ', at checkout' : 'Free') + '</dd></dl>' +
       '<a class="btn block" href="checkout.html">Checkout · ' + RF.rm(RF.cart.subtotal()) + '</a>' +
       '<div class="pays" aria-label="Payment methods"><span>FPX</span><span>Visa</span><span>Mastercard</span><span>GrabPay</span></div>';
+    if (sub < RF.FREE_OVER) {
+      var ups = Object.keys(RF.CATALOG).filter(function (id) { return !items.some(function (l) { return l.id === id; }); });
+      if (ups.length) body.insertAdjacentHTML('beforeend', '<div class="upsell"><span class="label">Complete the set</span>' + ups.map(function (id) {
+        var p = RF.CATALOG[id];
+        return '<button type="button" class="up" data-inc-new="' + id + '"><img src="' + RF.img(id) + '" alt=""><span>' + p.short + '<br><small>' + RF.rm(p.price) + '</small></span><b aria-hidden="true">+</b><span class="sr">Add ' + p.name + '</span></button>';
+      }).join('') + '</div>');
+    }
   }
   document.addEventListener('click', function (e) {
-    var t = e.target.closest('[data-inc],[data-dec],[data-open-bag]');
+    var t = e.target.closest('[data-inc],[data-dec],[data-open-bag],[data-inc-new]');
     if (!t) return;
+    if (t.hasAttribute('data-inc-new')) { RF.cart.add(t.dataset.incNew, 1); return; }
     if (t.hasAttribute('data-open-bag')) { e.preventDefault(); RF.openBag(); return; }
     var id = t.dataset.inc || t.dataset.dec, l = cart.find(function (x) { return x.id === id; });
     if (l) RF.cart.set(id, l.qty + (t.dataset.inc ? 1 : -1));
