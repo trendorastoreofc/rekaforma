@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Checkout · Rekaforma</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffed9f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap" style="grid-template-columns:1fr auto 1fr">
+    <a class="small" href="product.html" style="justify-self:start;text-decoration:none">← Shop</a>
+    <a class="brand" href="index.html" aria-label="Rekaforma home" style="grid-column:2;justify-self:center"><span class="logo" aria-hidden="true"></span></a>
+    <span></span>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="checkout">
+    <form id="co" novalidate>
+      <h1>Checkout</h1>
+      <div style="display:grid;gap:20px">
+        <section class="panel">
+          <h2>Contact</h2>
+          <div class="fields">
+            <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required><span class="err"></span></div>
+            <div class="f"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="012 345 6789" required><span class="err"></span></div>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>Deliver to</h2>
+          <div class="fields">
+            <div class="f full"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required><span class="err"></span></div>
+            <div class="f full"><label for="line1">Address</label><input id="line1" name="line1" autocomplete="address-line1" placeholder="House number and street" required><span class="err"></span></div>
+            <div class="f full"><label for="line2">Address line 2 <span class="small">(optional)</span></label><input id="line2" name="line2" autocomplete="address-line2" placeholder="Unit, taman, building"></div>
+            <div class="f"><label for="postcode">Postcode</label><input id="postcode" name="postcode" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" required><span class="err"></span></div>
+            <div class="f"><label for="city">City</label><input id="city" name="city" autocomplete="address-level2" required><span class="err"></span></div>
+            <div class="f full"><label for="state">State</label>
+              <select id="state" name="state" autocomplete="address-level1" required>
+                <option value="">Choose a state</option>
+                <option>Johor</option><option>Kedah</option><option>Kelantan</option><option>Kuala Lumpur</option><option>Labuan</option>
+                <option>Melaka</option><option>Negeri Sembilan</option><option>Pahang</option><option>Perak</option><option>Perlis</option>
+                <option>Pulau Pinang</option><option>Putrajaya</option><option>Sabah</option><option>Sarawak</option><option>Selangor</option><option>Terengganu</option>
+              </select><span class="err"></span></div>
+            <div class="f full"><label for="note">Note for us <span class="small">(optional)</span></label><textarea id="note" name="note" maxlength="300" placeholder="A gift? Tell us and we will leave the price off the packing slip."></textarea></div>
+          </div>
+        </section>
+      </div>
+    </form>
+
+    <aside class="summary">
+      <div class="panel">
+        <h2>Your order</h2>
+        <div id="lines" style="display:grid;gap:10px"></div>
+        <dl class="totals">
+          <dt>Subtotal</dt><dd id="tSub">RM0</dd>
+          <dt>Shipping <span class="small" id="tZone"></span></dt><dd id="tShip">Choose a state</dd>
+          <dt class="grand">Total</dt><dd class="grand" id="tTotal">RM0</dd>
+        </dl>
+        <button class="btn block" type="submit" form="co" id="payBtn">Pay securely</button>
+        <div class="pays" aria-label="Payment methods"><span>FPX</span><span>CARD</span><span>GRABPAY</span></div>
+        <p class="small" style="margin:0;text-align:center">You will pay on Stripe's secure page, then come back here.</p>
+        <div class="notice" id="notice" hidden></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<script src="assets/js/site.js"></script>
+<script>
+(function () {
+  'use strict';
+  var form = document.getElementById('co'), payBtn = document.getElementById('payBtn'), notice = document.getElementById('notice');
+  var cfg = null;
+  fetch('shop-config.json').then(function (r) { return r.json(); }).then(function (c) { cfg = c; render(); }).catch(function () {});
+
+  function zone() {
+    var st = form.state.value; if (!st || !cfg) return null;
+    return cfg.eastStates.indexOf(st) >= 0 ? 'east' : 'west';
+  }
+  function render() {
+    var items = RF.cart.items();
+    document.getElementById('lines').innerHTML = items.length
+      ? items.map(function (l) { return RF.lineHTML(l, true); }).join('')
+      : '<div class="empty"><p>Your bag is empty.</p><a class="btn alt" href="product.html">Pick a flower</a></div>';
+    var sub = RF.cart.subtotal(), z = zone(), ship = z ? cfg.shipping[z].price : null;
+    document.getElementById('tSub').textContent = RF.rm(sub);
+    document.getElementById('tZone').textContent = z ? '· ' + cfg.shipping[z].label : '';
+    document.getElementById('tShip').textContent = !z ? 'Choose a state' : ship == null ? 'RM [X]' : RF.rm(ship);
+    document.getElementById('tTotal').textContent = RF.rm(sub + (ship || 0));
+    payBtn.disabled = !items.length;
+    payBtn.textContent = 'Pay ' + RF.rm(sub + (ship || 0)) + ' securely';
+  }
+  RF.cart.on(render);
+  form.state.addEventListener('change', render);
+  render();
+
+  var rules = {
+    email: function (v, el) { return el.validity.valid ? '' : 'Enter an email like name@example.com.'; },
+    phone: function (v) { return /^(\+?6?0)[0-9]{8,10}$/.test(v.replace(/[\s-]/g, '')) ? '' : 'Enter a Malaysian number, for example 012 345 6789.'; },
+    name: function (v) { return v.trim() ? '' : 'Enter the name on the parcel.'; },
+    line1: function (v) { return v.trim() ? '' : 'Enter the street address.'; },
+    postcode: function (v) { return /^[0-9]{5}$/.test(v) ? '' : 'Postcodes are 5 digits.'; },
+    city: function (v) { return v.trim() ? '' : 'Enter the city or town.'; },
+    state: function (v) { return v ? '' : 'Choose a state so we can work out shipping.'; }
+  };
+  function check(el) {
+    var msg = rules[el.name] ? rules[el.name](el.value, el) : '';
+    el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    var err = el.parentNode.querySelector('.err'); if (err) err.textContent = msg;
+    return !msg;
+  }
+  Object.keys(rules).forEach(function (n) { form[n].addEventListener('blur', function () { check(form[n]); }); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); notice.hidden = true;
+    var bad = Object.keys(rules).map(function (n) { return check(form[n]) ? null : form[n]; }).filter(Boolean);
+    if (bad.length) { bad[0].focus(); return; }
+    payBtn.disabled = true; payBtn.textContent = 'Opening secure payment…';
+    var body = {
+      items: RF.cart.items(),
+      customer: ['email', 'phone', 'name', 'line1', 'line2', 'postcode', 'city', 'state', 'note'].reduce(function (o, k) { o[k] = form[k].value.trim(); return o; }, {})
+    };
+    fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, status: r.status, j: j }; }); })
+      .then(function (res) {
+        if (res.ok && res.j.url) { location.href = res.j.url; return; }
+        throw new Error(res.status === 404 || res.status === 405
+          ? 'Payments are not switched on for this copy of the site yet. Your bag is saved.'
+          : (res.j.error || 'Payment could not start. Nothing was charged. Try again in a moment.'));
+      })
+      .catch(function (err) {
+        notice.textContent = err.message && err.message !== 'Failed to fetch' ? err.message : 'Could not reach the payment server. Check your connection and try again. Nothing was charged.';
+        notice.hidden = false; render();
+      });
+  });
+})();
+</script>
+</body>
+</html>

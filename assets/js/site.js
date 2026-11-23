@@ -1,69 +1,130 @@
-/* Rekaforma storefront, shared behaviour. No framework, no build step. */
+/* Rekaforma storefront, shared behaviour: catalogue, cart, drawer, small interactions.
+   No framework, no build step. Prices are in sen (RM 15.00 = 1500). The server
+   (functions/api/checkout.js) holds its own copy of the prices and never trusts these. */
 (function () {
   'use strict';
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  window.RF = window.RF || {};
-  RF.FLOWERS = {
-    sun: { name: 'Sunflower', tint: '#f4e3a6', dot: '#f2b61c', line: 'Yellow petals, brown seed head, green band' },
-    sak: { name: 'Sakura', tint: '#f5d9df', dot: '#f2a9bf', line: 'Blush petals, deep pink centre, white band' },
-    dai: { name: 'Daisy', tint: '#e1e6d6', dot: '#efece3', line: 'White petals, yellow button, green band' }
+  var RF = window.RF = window.RF || {};
+  RF.CATALOG = {
+    'flower-sun': { flower: 'sun', name: 'Sunflower Clicker', short: 'Sunflower', price: 1500, tint: '#ffd45c', dot: '#f2b61c', line: 'Yellow petals, brown seed head, green band' },
+    'flower-sak': { flower: 'sak', name: 'Sakura Clicker', short: 'Sakura', price: 1500, tint: '#f8bfc9', dot: '#f2a9bf', line: 'Blush petals, deep pink centre, white band' },
+    'flower-dai': { flower: 'dai', name: 'Daisy Clicker', short: 'Daisy', price: 1500, tint: '#d3e6b8', dot: '#f4f1e8', line: 'White petals, yellow button, green band' }
   };
+  RF.idFor = function (f) { return 'flower-' + f; };
+  RF.img = function (id, view) { return 'assets/img/flower/' + RF.CATALOG[id].flower + '_' + (view || 'top') + '.webp'; };
+  RF.rm = function (sen) { return 'RM' + (sen / 100).toFixed(sen % 100 ? 2 : 0); };
 
   /* storage that survives private mode */
-  function store(k, v) {
-    try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; }
-  }
+  function load(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+  function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 
-  /* header */
-  var header = $('.header');
-  if (header) {
-    var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 8); };
-    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
-  }
-  var menuBtn = $('.menu-btn'), nav = $('.nav');
-  if (menuBtn && nav) {
-    menuBtn.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', open);
-    });
-    $$('a', nav).forEach(function (a) { a.addEventListener('click', function () { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }); });
-  }
-
-  /* bag */
-  var bagN = parseInt(store('rf-bag') || '0', 10) || 0;
-  function paintBag() { $$('.bag-count').forEach(function (el) { el.textContent = bagN; el.dataset.n = bagN; }); }
-  paintBag();
-  RF.addToBag = function (n, label, img, tint) {
-    bagN += n; store('rf-bag', String(bagN)); paintBag();
-    RF.toast('Added to bag: ' + label, img, tint);
+  /* ---------- cart ---------- */
+  var cart = (load('rf-cart') || []).filter(function (l) { return RF.CATALOG[l.id] && l.qty > 0; });
+  var listeners = [];
+  RF.cart = {
+    items: function () { return cart.slice(); },
+    count: function () { return cart.reduce(function (n, l) { return n + l.qty; }, 0); },
+    subtotal: function () { return cart.reduce(function (s, l) { return s + l.qty * RF.CATALOG[l.id].price; }, 0); },
+    add: function (id, qty) {
+      var l = cart.find(function (x) { return x.id === id; });
+      if (l) l.qty = Math.min(50, l.qty + qty); else cart.push({ id: id, qty: qty });
+      commit();
+    },
+    set: function (id, qty) {
+      cart = qty > 0 ? cart.map(function (l) { return l.id === id ? { id: id, qty: Math.min(50, qty) } : l; }) : cart.filter(function (l) { return l.id !== id; });
+      commit();
+    },
+    clear: function () { cart = []; commit(); },
+    on: function (fn) { listeners.push(fn); }
   };
+  function commit() { save('rf-cart', cart); paint(); listeners.forEach(function (fn) { fn(); }); }
 
-  /* toast */
-  var toastEl, toastT;
-  RF.toast = function (msg, img, tint) {
-    if (!toastEl) {
-      toastEl = document.createElement('div'); toastEl.className = 'toast'; toastEl.setAttribute('role', 'status');
-      document.body.appendChild(toastEl);
+  /* ---------- drawer ---------- */
+  var drawer, scrim, body, foot;
+  function buildDrawer() {
+    scrim = document.createElement('div'); scrim.className = 'scrim';
+    drawer = document.createElement('aside'); drawer.className = 'drawer'; drawer.setAttribute('aria-label', 'Your bag'); drawer.setAttribute('aria-hidden', 'true');
+    drawer.innerHTML =
+      '<div class="drawer-head"><h2>Your bag</h2>' +
+      '<button class="icon-btn" type="button" data-close aria-label="Close bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
+      '<div class="drawer-body"></div><div class="drawer-foot"></div>';
+    document.body.appendChild(scrim); document.body.appendChild(drawer);
+    body = $('.drawer-body', drawer); foot = $('.drawer-foot', drawer);
+    scrim.addEventListener('click', RF.closeBag);
+    $('[data-close]', drawer).addEventListener('click', RF.closeBag);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('on')) RF.closeBag(); });
+  }
+  RF.lineHTML = function (l, editable) {
+    var p = RF.CATALOG[l.id];
+    return '<div class="line" style="--tint:' + p.tint + '">' +
+      '<img src="' + RF.img(l.id) + '" alt="" width="76" height="76">' +
+      '<div><h3>' + p.name + '</h3><div class="unit">' + RF.rm(p.price) + ' each</div></div>' +
+      '<div class="end"><span class="amt">' + RF.rm(p.price * l.qty) + '</span>' +
+      (editable
+        ? '<span class="stepper"><button type="button" data-dec="' + l.id + '" aria-label="One fewer ' + p.short + '">−</button><output>' + l.qty + '</output><button type="button" data-inc="' + l.id + '" aria-label="One more ' + p.short + '">+</button></span>'
+        : '<span class="unit">× ' + l.qty + '</span>') +
+      '</div></div>';
+  };
+  function renderDrawer() {
+    if (!drawer) return;
+    var items = RF.cart.items();
+    if (!items.length) {
+      body.innerHTML = '<div class="empty"><span class="logo-mark" aria-hidden="true"></span><p>Your bag is empty.</p><a class="btn alt" href="product.html">Pick a flower</a></div>';
+      foot.innerHTML = '';
+      return;
     }
-    toastEl.innerHTML = '';
-    if (img) { var i = document.createElement('img'); i.src = img; i.alt = ''; if (tint) i.style.background = tint; toastEl.appendChild(i); }
-    var s = document.createElement('span'); s.textContent = msg; toastEl.appendChild(s);
-    toastEl.classList.add('on'); clearTimeout(toastT);
-    toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2600);
+    body.innerHTML = items.map(function (l) { return RF.lineHTML(l, true); }).join('');
+    foot.innerHTML =
+      '<dl class="totals"><dt>Subtotal</dt><dd>' + RF.rm(RF.cart.subtotal()) + '</dd><dt class="small">Shipping</dt><dd class="small">Next step</dd></dl>' +
+      '<a class="btn block" href="checkout.html">Checkout · ' + RF.rm(RF.cart.subtotal()) + '</a>' +
+      '<div class="pays" aria-label="Payment methods"><span>FPX</span><span>CARD</span><span>GRABPAY</span></div>';
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-inc],[data-dec],[data-open-bag]');
+    if (!t) return;
+    if (t.hasAttribute('data-open-bag')) { e.preventDefault(); RF.openBag(); return; }
+    var id = t.dataset.inc || t.dataset.dec, l = cart.find(function (x) { return x.id === id; });
+    if (l) RF.cart.set(id, l.qty + (t.dataset.inc ? 1 : -1));
+  });
+  var lastFocus;
+  RF.openBag = function () {
+    if (!drawer) buildDrawer();
+    renderDrawer(); lastFocus = document.activeElement;
+    scrim.classList.add('on'); drawer.classList.add('on'); drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { $('[data-close]', drawer).focus(); }, 50);
+  };
+  RF.closeBag = function () {
+    scrim.classList.remove('on'); drawer.classList.remove('on'); drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
   };
 
-  /* reveal on scroll */
-  if ('IntersectionObserver' in window && !still) {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    $$('.reveal').forEach(function (el) { io.observe(el); });
-  } else { $$('.reveal').forEach(function (el) { el.classList.add('in'); }); }
+  function paint() {
+    var n = RF.cart.count();
+    $$('.bag-count').forEach(function (el) { el.textContent = n; el.dataset.n = n; });
+    renderDrawer();
+  }
+  paint();
 
-  /* mechanical click, synthesised so there is no audio file to load */
+  RF.addToBag = function (id, qty) {
+    RF.cart.add(id, qty);
+    RF.click(true); setTimeout(function () { RF.click(false); }, 90);
+    RF.openBag();
+  };
+
+  /* ---------- toast ---------- */
+  var toastEl, toastT;
+  RF.toast = function (msg) {
+    if (!toastEl) { toastEl = document.createElement('div'); toastEl.className = 'toast'; toastEl.setAttribute('role', 'status'); document.body.appendChild(toastEl); }
+    toastEl.textContent = msg; toastEl.classList.add('on'); clearTimeout(toastT);
+    toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2800);
+  };
+
+  /* ---------- mechanical click, synthesised ---------- */
   var actx = null;
   RF.click = function (down) {
     try {
@@ -77,16 +138,34 @@
     } catch (e) {}
   };
 
-  /* waitlist forms (front end only for now) */
+  /* ---------- header ---------- */
+  var header = $('.header');
+  if (header) {
+    var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  }
+  var menuBtn = $('.menu-btn'), nav = $('.nav');
+  if (menuBtn && nav) {
+    menuBtn.addEventListener('click', function () { menuBtn.setAttribute('aria-expanded', nav.classList.toggle('open')); });
+    $$('a', nav).forEach(function (a) { a.addEventListener('click', function () { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }); });
+  }
+
+  /* ---------- quick add buttons on cards ---------- */
+  $$('[data-add]').forEach(function (b) {
+    b.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); RF.addToBag(b.dataset.add, 1); });
+  });
+
+  /* ---------- waitlist (front end only until an email tool is chosen) ---------- */
   $$('form[data-waitlist]').forEach(function (f) {
     f.addEventListener('submit', function (e) {
       e.preventDefault();
       var note = $('.form-note', f.parentNode), input = $('input', f);
-      if (!input.value || input.validity.typeMismatch) { note.textContent = 'That email does not look right.'; input.focus(); return; }
+      if (!input.value || input.validity.typeMismatch) { note.textContent = 'That email does not look right. Check it and try again.'; input.focus(); return; }
       note.textContent = 'You are on the list. We will email you once, on launch day.';
       input.value = '';
     });
   });
 
   var yr = $('[data-year]'); if (yr) yr.textContent = new Date().getFullYear();
+  RF.still = still;
 })();

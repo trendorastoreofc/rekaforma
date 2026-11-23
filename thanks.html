@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Order placed · Rekaforma</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffed9f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="header">
+  <div class="wrap"><span></span><a class="brand" href="index.html" aria-label="Rekaforma home" style="grid-column:2;justify-self:center"><span class="logo" aria-hidden="true"></span></a><span></span></div>
+</header>
+<main class="wrap thanks">
+  <div class="inner">
+    <span class="logo-mark" aria-hidden="true"></span>
+    <h1 class="display" style="font-size:clamp(48px,7vw,88px)">Thank you!</h1>
+    <p class="lede">Your order is in. Stripe has emailed your receipt, and we will email you again when your flowers leave the studio.</p>
+    <a class="btn" href="index.html">Back to the shop</a>
+  </div>
+</main>
+<script src="assets/js/site.js"></script>
+<script>
+  /* Stripe sends people here with ?session_id=… only after a successful payment */
+  if (/[?&]session_id=/.test(location.search)) RF.cart.clear();
+</script>
+</body>
+</html>

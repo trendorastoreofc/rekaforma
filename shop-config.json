@@ -1,0 +1,14 @@
+{
+  "currency": "myr",
+  "products": {
+    "flower-sun": { "name": "Sunflower Clicker", "price": 1500 },
+    "flower-sak": { "name": "Sakura Clicker", "price": 1500 },
+    "flower-dai": { "name": "Daisy Clicker", "price": 1500 }
+  },
+  "shipping": {
+    "west": { "label": "Peninsular Malaysia", "price": null },
+    "east": { "label": "Sabah, Sarawak and Labuan", "price": null }
+  },
+  "eastStates": ["Sabah", "Sarawak", "Labuan"],
+  "_note": "Prices are in sen (1500 = RM15). Set both shipping prices before taking real orders; checkout refuses to run while either is null."
+}
