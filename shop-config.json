@@ -1,14 +1,33 @@
 {
   "currency": "myr",
   "products": {
-    "flower-sun": { "name": "Flower Clicker, Sunflower", "price": 1500 },
-    "flower-sak": { "name": "Flower Clicker, Sakura", "price": 1500 },
-    "flower-dai": { "name": "Flower Clicker, Daisy", "price": 1500 }
+    "flower-sun": {
+      "name": "Flower Clicker, Sunflower",
+      "price": 1500
+    },
+    "flower-sak": {
+      "name": "Flower Clicker, Sakura",
+      "price": 1500
+    },
+    "flower-dai": {
+      "name": "Flower Clicker, Daisy",
+      "price": 1500
+    }
   },
   "shipping": {
-    "west": { "label": "Peninsular Malaysia", "price": null },
-    "east": { "label": "Sabah, Sarawak and Labuan", "price": null }
+    "west": {
+      "label": "Peninsular Malaysia",
+      "price": 700
+    },
+    "east": {
+      "label": "Sabah, Sarawak and Labuan",
+      "price": 1500
+    }
   },
-  "eastStates": ["Sabah", "Sarawak", "Labuan"],
-  "_note": "Prices are in sen (1500 = RM15). Set both shipping prices before taking real orders; checkout refuses to run while either is null."
+  "eastStates": [
+    "Sabah",
+    "Sarawak",
+    "Labuan"
+  ],
+  "_note": "Prices are in sen (1500 = RM15). Checkout refuses to run if a shipping price is null."
 }
