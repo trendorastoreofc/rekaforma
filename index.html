@@ -3,217 +3,170 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rekaforma · Flower Clickers from Kuala Lumpur</title>
-<meta name="description" content="Rekaforma designs small 3D printed objects in Kuala Lumpur. Series 01: the Flower Clicker, a mechanical switch you can carry. RM15.">
-<meta name="theme-color" content="#ffed9f">
+<title>Rekaforma · Objects designed in Kuala Lumpur</title>
+<meta name="description" content="Rekaforma designs useful objects for the home and desk, and prints them in-house in Kuala Lumpur. Series 01: the Flower Clicker.">
+<meta name="theme-color" content="#eeeae3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 
-<div class="announce">Flower Clickers are <b>RM15</b> each. <a href="product.html">Pick yours</a></div>
+<div class="announce">Series 01 is available now · Designed and printed in Kuala Lumpur</div>
 
 <header class="header">
   <div class="wrap">
-    <button class="icon-btn menu-btn" type="button" aria-label="Menu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
-    </button>
-    <a class="brand" href="index.html" aria-label="Rekaforma home"><span class="logo" aria-hidden="true"></span></a>
+    <button class="text-btn menu-btn" type="button" aria-expanded="false">Menu</button>
     <nav class="nav" aria-label="Main">
       <a href="product.html">Shop</a>
-      <a href="#series">Flowers</a>
-      <a href="#next">Photo Strip<span class="soon">Soon</span></a>
-      <a href="#studio">Studio</a>
+      <a href="#series-01">Series 01</a>
+      <a href="#approach">Studio</a>
+      <a href="#next">Upcoming<span class="soon">02</span></a>
     </nav>
+    <a class="brand" href="index.html" aria-label="Rekaforma home"><span class="logo" aria-hidden="true"></span></a>
     <div class="tools">
-      <button class="icon-btn" type="button" data-open-bag aria-label="Open bag">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-        <span class="bag-count" data-n="0">0</span>
-      </button>
+      <button class="text-btn" type="button" data-open-bag>Bag (<span class="bag-count">0</span>)</button>
     </div>
   </div>
 </header>
 
 <main>
   <section class="hero">
-    <div class="wrap">
-      <div class="hero-copy">
-        <span class="eyebrow">Series 01 · Flower Clicker</span>
-        <h1 class="display">A flower that <span class="hl">clicks.</span></h1>
-        <p class="lede">Press the petals and a real mechanical keyboard switch goes click. Same flower on both sides, a loop for your keys. Designed and printed in Kuala Lumpur.</p>
-        <div class="pick" role="group" aria-label="Choose a flower" id="heroPick">
-          <button type="button" data-f="sun" aria-pressed="true"><span style="background:#ffd45c"></span>Sunflower</button>
-          <button type="button" data-f="sak" aria-pressed="false"><span style="background:#f8bfc9"></span>Sakura</button>
-          <button type="button" data-f="dai" aria-pressed="false"><span style="background:#f4f1e8"></span>Daisy</button>
-        </div>
-        <div class="hero-actions">
-          <button class="btn" type="button" id="heroAdd">Add Sunflower · RM15</button>
-          <a class="btn alt" href="#press">Hear the click</a>
-        </div>
-      </div>
-
-      <div class="hero-stage" id="heroStage">
-        <div class="price-sticker" aria-hidden="true"><small>Only</small><b>RM15</b></div>
-        <img class="on" data-f="sun" src="assets/img/flower/sun_stand.webp" alt="Sunflower Clicker standing upright, yellow petals around a brown seed head" width="1200" height="1200">
-        <img data-f="sak" src="assets/img/flower/sak_stand.webp" alt="Sakura Clicker standing upright, blush petals around a deep pink centre" width="1200" height="1200">
-        <img data-f="dai" src="assets/img/flower/dai_stand.webp" alt="Daisy Clicker standing upright, white petals around a yellow centre" width="1200" height="1200">
-      </div>
-    </div>
-  </section>
-
-  <div class="band" aria-hidden="true">
-    <div class="band-track">
-      <span>Mechanical switch inside</span><span>48 mm across</span><span>Same flower both sides</span><span>Printed in KL</span><span>RM15 each</span>
-      <span>Mechanical switch inside</span><span>48 mm across</span><span>Same flower both sides</span><span>Printed in KL</span><span>RM15 each</span>
-    </div>
-  </div>
-
-  <section class="section" id="series">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">The Flower Series</span>
-          <h2 class="h2">Three flowers.<br>One <span class="hl">click.</span></h2>
-        </div>
-        <a class="btn alt" href="product.html">See them up close</a>
-      </div>
-
-      <div class="grid-3">
-        <div class="card" style="--tint:var(--t-sun)">
-          <a class="media" href="product.html#sun" tabindex="-1" aria-hidden="true">
-            <span class="tag">New</span>
-            <img class="main" src="assets/img/flower/sun_top.webp" alt="Sunflower Clicker seen from the front" loading="lazy" width="1200" height="1200">
-            <img class="alt" src="assets/img/flower/sun_hero.webp" alt="" loading="lazy" width="1200" height="1200">
-          </a>
-          <div class="info">
-            <div class="row"><h3><a href="product.html#sun">Sunflower</a></h3><span class="price">RM15</span></div>
-            <p>Twenty petals and a seed head with 112 seeds.</p>
-            <button class="btn block quick" type="button" data-add="flower-sun">Add to bag</button>
-          </div>
-        </div>
-        <div class="card" style="--tint:var(--t-sak)">
-          <a class="media" href="product.html#sak" tabindex="-1" aria-hidden="true">
-            <span class="tag">New</span>
-            <img class="main" src="assets/img/flower/sak_top.webp" alt="Sakura Clicker seen from the front" loading="lazy" width="1200" height="1200">
-            <img class="alt" src="assets/img/flower/sak_hero.webp" alt="" loading="lazy" width="1200" height="1200">
-          </a>
-          <div class="info">
-            <div class="row"><h3><a href="product.html#sak">Sakura</a></h3><span class="price">RM15</span></div>
-            <p>Five notched petals with a soft pinwheel twist.</p>
-            <button class="btn block quick" type="button" data-add="flower-sak">Add to bag</button>
-          </div>
-        </div>
-        <div class="card" style="--tint:var(--t-dai)">
-          <a class="media" href="product.html#dai" tabindex="-1" aria-hidden="true">
-            <span class="tag">New</span>
-            <img class="main" src="assets/img/flower/dai_top.webp" alt="Daisy Clicker seen from the front" loading="lazy" width="1200" height="1200">
-            <img class="alt" src="assets/img/flower/dai_hero.webp" alt="" loading="lazy" width="1200" height="1200">
-          </a>
-          <div class="info">
-            <div class="row"><h3><a href="product.html#dai">Daisy</a></h3><span class="price">RM15</span></div>
-            <p>Twelve long petals over twelve short ones.</p>
-            <button class="btn block quick" type="button" data-add="flower-dai">Add to bag</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="press" id="press">
-    <div class="wrap">
-      <div class="press-copy">
-        <span class="eyebrow">Go on, press it</span>
-        <h2 class="h2">Press the petals. Hear the switch.</h2>
-        <p class="lede">The front of the flower rides on a keyboard switch. Press anywhere on the petals, the green band closes 4 mm, and it springs back. Good for meetings, queues and long calls.</p>
-        <button class="press-btn" id="pressBtn" type="button">Hold to press</button>
-        <span class="counter" aria-live="polite"><b id="pressN">0</b> clicks so far</span>
-      </div>
-      <div class="press-stage" id="pressStage">
-        <img src="assets/img/flower/sun_hero.webp" alt="Sunflower Clicker at an angle, showing the green band between the two flower faces" loading="lazy" width="1200" height="1200">
+    <picture>
+      <source media="(max-width: 760px)" srcset="assets/img/studio/hero_portrait.webp">
+      <img src="assets/img/studio/hero.webp" alt="The Sunflower Clicker standing on a stone plinth" width="2400" height="1400">
+    </picture>
+    <div class="copy wrap">
+      <span class="label">Series 01 · Flower Clicker</span>
+      <h1 class="display">Objects for everyday use.</h1>
+      <p class="body">Designed and printed in Kuala Lumpur, a few at a time. Our first series is a small one for the desk.</p>
+      <div class="actions">
+        <a class="btn" href="product.html">Shop Series 01</a>
+        <a class="link" href="#approach">Our approach
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M2 8h12M10 4l4 4-4 4"/></svg></a>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="wrap anatomy">
-      <figure id="anatomyFig">
-        <img src="assets/img/flower/sun_exploded.webp" alt="Sunflower Clicker taken apart: centre, front petals, band, switch, back petals and back centre stacked in a column" loading="lazy" width="1200" height="1200">
-        <img src="assets/img/flower/sak_exploded.webp" alt="" loading="lazy" width="1200" height="1200">
-      </figure>
-      <div>
-        <span class="eyebrow">What is inside</span>
-        <h2 class="h2" style="margin-top:14px">Five printed parts and one switch.</h2>
-        <ol class="parts">
-          <li><span class="n" style="background:#7a4b2a;color:#fff">1</span><div><h3>Front centre</h3><p>Its own print, glued in, so the colour edge stays clean.</p></div><span class="g">~1.5 g</span></li>
-          <li><span class="n" style="background:var(--t-sun)">2</span><div><h3>Front petals</h3><p>One colour, printed flower side up.</p></div><span class="g">~7 g</span></li>
-          <li><span class="n" style="background:#9cc06a">3</span><div><h3>Band</h3><p>Follows the petal outline and hides the switch.</p></div><span class="g">~2 g</span></li>
-          <li><span class="n" style="background:#7fb6ee">4</span><div><h3>MX switch</h3><p>A standard mechanical keyboard switch.</p></div><span class="g">1 pc</span></li>
-          <li><span class="n" style="background:var(--t-sun)">5</span><div><h3>Back petals and centre</h3><p>The same flower again, so it looks right whichever way it lands.</p></div><span class="g">~9.5 g</span></li>
-        </ol>
-      </div>
+    <div class="wrap intro">
+      <span class="label">Rekaforma</span>
+      <p class="statement">We design useful things for the home and the desk, then print them ourselves in our studio in Kuala Lumpur. <em>Each one goes through rounds of prototypes before it reaches this shop.</em></p>
     </div>
   </section>
 
-  <section class="wrap">
-    <div class="wide">
-      <img src="assets/img/flower/trio.webp" alt="Sakura, Sunflower and Daisy Clickers standing side by side" loading="lazy" width="2400" height="1500">
-      <div class="cap">
-        <span class="eyebrow">Collect all three</span>
-        <p class="h2">RM45 for the full bunch.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="next">
+  <section id="series-01" style="padding-bottom:clamp(80px,11vw,160px)">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Series 02 · Coming next</span>
-          <h2 class="h2">The Rekaforma <span class="hl">Photo Strip.</span></h2>
-        </div>
+      <div class="rule-head">
+        <h2 class="h2">Series 01</h2>
+        <a class="link" href="product.html">View the series
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M2 8h12M10 4l4 4-4 4"/></svg></a>
       </div>
-      <div class="next">
-        <div class="next-card a">
-          <p class="lede">Frames for the 2 × 6 inch strip from every photobooth. Three designs, each named after something from home.</p>
-          <ul class="strip-names">
-            <li><b>Jendela</b><span>A kampung window, on stilts</span></li>
-            <li><b>Lipat</b><span>One ribbon, folded, two strips</span></li>
-            <li><b>Potong</b><span>Aiskrim potong, melting</span></li>
-          </ul>
+      <div class="grid-3">
+        <article class="card">
+          <a class="media" href="product.html#sun" tabindex="-1" aria-hidden="true">
+            <img class="main" src="assets/img/studio/card_sun.webp" alt="" loading="lazy" width="1200" height="1500">
+            <img class="alt" src="assets/img/flower/sun_top.webp" alt="" loading="lazy" width="1200" height="1200">
+          </a>
+          <div>
+            <div class="row"><h3><a href="product.html#sun">Flower Clicker, Sunflower</a></h3><span class="price">RM15</span></div>
+            <p>Desk object · mechanical switch</p>
+          </div>
+        </article>
+        <article class="card">
+          <a class="media" href="product.html#sak" tabindex="-1" aria-hidden="true">
+            <img class="main" src="assets/img/studio/card_sak.webp" alt="" loading="lazy" width="1200" height="1500">
+            <img class="alt" src="assets/img/flower/sak_top.webp" alt="" loading="lazy" width="1200" height="1200">
+          </a>
+          <div>
+            <div class="row"><h3><a href="product.html#sak">Flower Clicker, Sakura</a></h3><span class="price">RM15</span></div>
+            <p>Desk object · mechanical switch</p>
+          </div>
+        </article>
+        <article class="card">
+          <a class="media" href="product.html#dai" tabindex="-1" aria-hidden="true">
+            <img class="main" src="assets/img/studio/card_dai.webp" alt="" loading="lazy" width="1200" height="1500">
+            <img class="alt" src="assets/img/flower/dai_top.webp" alt="" loading="lazy" width="1200" height="1200">
+          </a>
+          <div>
+            <div class="row"><h3><a href="product.html#dai">Flower Clicker, Daisy</a></h3><span class="price">RM15</span></div>
+            <p>Desk object · mechanical switch</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-bottom:clamp(80px,11vw,160px)">
+    <div class="wrap split">
+      <figure id="detailFig">
+        <img src="assets/img/studio/detail.webp" alt="Close-up of the Sunflower Clicker: textured seed head, sculpted petals and the green band between the two faces" loading="lazy" width="1400" height="1400">
+        <img src="assets/img/studio/detail_dai.webp" alt="" loading="lazy" width="1400" height="1400">
+      </figure>
+      <div class="copy">
+        <span class="label">The Flower Clicker</span>
+        <h2 class="h2">A keyboard switch, set inside a flower.</h2>
+        <p class="body">Press the petals and the face travels 4 mm on a mechanical switch, then springs back. The same flower sits on both sides, and every colour is its own printed part, so there is no paint to wear off.</p>
+        <dl class="spec">
+          <dt>Diameter</dt><dd>48 mm</dd>
+          <dt>Depth, at rest</dt><dd>29 mm</dd>
+          <dt>Key travel</dt><dd>4.0 mm</dd>
+          <dt>Parts</dt><dd>5 printed + 1 switch</dd>
+          <dt>Material</dt><dd>PLA</dd>
+        </dl>
+        <a class="link" href="product.html" style="justify-self:start">Discover the Flower Clicker
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M2 8h12M10 4l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="plate">
+    <img src="assets/img/studio/trio.webp" alt="Sakura, Sunflower and Daisy Clickers on three stone plinths of different heights" loading="lazy" width="2000" height="1250">
+  </section>
+  <div class="wrap caption">
+    <span class="label">Series 01 · Sakura, Sunflower, Daisy</span>
+    <span class="label">RM15 each</span>
+  </div>
+
+  <section class="section" id="approach">
+    <div class="wrap">
+      <div class="rule-head" style="border:0;padding:0"><h2 class="h2">How we work</h2></div>
+      <div class="cols">
+        <div>
+          <span class="label">Designed here</span>
+          <h3>Our own designs only</h3>
+          <p>We do not print other people's files. Every object starts as a sketch in our studio and is modelled from scratch.</p>
         </div>
-        <div class="next-card b">
-          <div style="display:grid;gap:14px">
-            <span class="eyebrow">Get it first</span>
-            <p class="h2" style="font-size:clamp(32px,3.6vw,48px)">One email on launch day. Nothing else.</p>
-          </div>
-          <div style="display:grid;gap:10px">
-            <form class="form" data-waitlist novalidate>
-              <label class="sr" for="wl">Email</label>
-              <input class="field" id="wl" type="email" placeholder="you@email.com" autocomplete="email" required>
-              <button class="btn" type="submit">Notify me</button>
-            </form>
-            <p class="form-note" aria-live="polite"></p>
-          </div>
+        <div>
+          <span class="label">Printed in-house</span>
+          <h3>Made in small batches</h3>
+          <p>We print on our own machines in Kuala Lumpur, a few at a time, and check each piece by hand before it ships.</p>
+        </div>
+        <div>
+          <span class="label">Built from parts</span>
+          <h3>Colour that lasts</h3>
+          <p>Each colour is printed as its own part and fitted together, instead of painted on, so the finish does not chip or fade.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="studio" style="padding-top:0">
-    <div class="wrap studio">
-      <span class="logo-mark" aria-hidden="true"></span>
-      <div class="studio-copy">
-        <span class="eyebrow">The studio</span>
-        <h2 class="h2">Reka + forma.</h2>
-        <div class="etym">
-          <div><b>reka</b><span>to design, to invent</span></div>
-          <div><b>forma</b><span>form, the shape in your hand</span></div>
-        </div>
-        <p>Rekaforma is a small design studio in Kuala Lumpur. We do not print other people's files. Every object here starts as our own sketch, goes through rounds of prototypes on our own printers, and only reaches this shop once it feels right to hold.</p>
-        <p>We start with things that feel familiar, a flower, a kuih, a kampung window, and turn them into something you will use every day.</p>
+  <section class="dark section" id="next">
+    <div class="wrap news">
+      <div style="display:grid;gap:22px">
+        <span class="label">Upcoming · Series 02</span>
+        <h2 class="h2">Next, objects for the home.</h2>
+        <p class="body">Series 02 is in the studio now. Leave your email and we will write once, when it is ready.</p>
+      </div>
+      <div>
+        <form class="form" data-waitlist novalidate>
+          <label class="sr" for="wl">Email address</label>
+          <input id="wl" type="email" placeholder="Email address" autocomplete="email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="form-note" aria-live="polite"></p>
       </div>
     </div>
   </section>
@@ -222,49 +175,21 @@
 <footer class="footer">
   <div class="wrap">
     <div class="top">
-      <div style="display:grid;gap:14px;max-width:34ch">
-        <h4>Rekaforma</h4>
-        <p style="margin:0">Designed objects, 3D printed in Kuala Lumpur.</p>
-      </div>
-      <div><h4>Shop</h4><ul><li><a href="product.html#sun">Sunflower</a></li><li><a href="product.html#sak">Sakura</a></li><li><a href="product.html#dai">Daisy</a></li></ul></div>
-      <div><h4>Help</h4><ul><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div class="sig" aria-label="Rekaforma"><span class="logo-mark" aria-hidden="true"></span><span class="logo" aria-hidden="true"></span></div>
+      <div><h4>Shop</h4><ul><li><a href="product.html">Series 01</a></li><li><a href="#next">Upcoming</a></li></ul></div>
+      <div><h4>Help</h4><ul><li><a href="#">Delivery</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact</a></li></ul></div>
       <div><h4>Follow</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li></ul></div>
     </div>
-    <span class="logo" aria-hidden="true"></span>
-    <div class="bottom"><span>© <span data-year>2026</span> Rekaforma. Kuala Lumpur, Malaysia.</span><span>Designed with purpose.</span></div>
+    <div class="bottom"><span>© <span data-year>2026</span> Rekaforma, Kuala Lumpur</span><span>Designed with purpose</span></div>
   </div>
 </footer>
 
 <script src="assets/js/site.js"></script>
 <script>
-(function () {
-  var stage = document.getElementById('heroStage'), imgs = stage.querySelectorAll('img');
-  var btns = document.querySelectorAll('#heroPick button'), add = document.getElementById('heroAdd');
-  var order = ['sun', 'sak', 'dai'], i = 0, timer, cur = 'sun';
-  function show(f) {
-    cur = f; var p = RF.CATALOG[RF.idFor(f)];
-    stage.style.setProperty('--tint', p.tint);
-    imgs.forEach(function (im) { im.classList.toggle('on', im.dataset.f === f); });
-    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.f === f); });
-    add.textContent = 'Add ' + p.short + ' · ' + RF.rm(p.price);
-  }
-  btns.forEach(function (b) { b.addEventListener('click', function () { clearInterval(timer); show(b.dataset.f); }); });
-  add.addEventListener('click', function () { clearInterval(timer); RF.addToBag(RF.idFor(cur), 1); });
-  if (!RF.still) timer = setInterval(function () { i = (i + 1) % 3; show(order[i]); }, 4000);
-
-  var btn = document.getElementById('pressBtn'), pstage = document.getElementById('pressStage'), nEl = document.getElementById('pressN');
-  var n = 0, down = false;
-  function press() { if (down) return; down = true; btn.classList.add('down'); pstage.classList.add('down'); RF.click(true); }
-  function release() { if (!down) return; down = false; btn.classList.remove('down'); pstage.classList.remove('down'); RF.click(false); nEl.textContent = ++n; }
-  btn.addEventListener('pointerdown', function (e) { e.preventDefault(); press(); });
-  window.addEventListener('pointerup', release);
-  btn.addEventListener('pointerleave', release);
-  btn.addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); press(); } });
-  btn.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Enter') release(); });
-
-  var fig = document.getElementById('anatomyFig');
-  if (!RF.still) setInterval(function () { fig.classList.toggle('alt'); }, 3600);
-})();
+  (function () {
+    var fig = document.getElementById('detailFig');
+    if (!RF.still) setInterval(function () { fig.classList.toggle('alt'); }, 4200);
+  })();
 </script>
 </body>
 </html>

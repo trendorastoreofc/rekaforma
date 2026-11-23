@@ -1,9 +1,9 @@
 {
   "currency": "myr",
   "products": {
-    "flower-sun": { "name": "Sunflower Clicker", "price": 1500 },
-    "flower-sak": { "name": "Sakura Clicker", "price": 1500 },
-    "flower-dai": { "name": "Daisy Clicker", "price": 1500 }
+    "flower-sun": { "name": "Flower Clicker, Sunflower", "price": 1500 },
+    "flower-sak": { "name": "Flower Clicker, Sakura", "price": 1500 },
+    "flower-dai": { "name": "Flower Clicker, Daisy", "price": 1500 }
   },
   "shipping": {
     "west": { "label": "Peninsular Malaysia", "price": null },

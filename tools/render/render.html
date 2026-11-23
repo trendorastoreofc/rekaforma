@@ -106,6 +106,47 @@ window.trioShot = function(o){
   outer.visible = true; trio.visible = false;
   return canvas.toDataURL('image/png');
 };
+
+/* studio scenes: opaque backdrop, flowers standing on plinths */
+const studio = new THREE.Group(); studio.visible = false; scene.add(studio);
+function standing(f){
+  const g = new THREE.Group();
+  ['base','base_ins','cap','cap_ins','ring'].forEach(s => { const m = new THREE.Mesh(geom(f+'_'+s), print); m.castShadow = m.receiveShadow = true; g.add(m); });
+  return g;
+}
+window.studioShot = function(o){
+  o = Object.assign({bg:'#e4dfd5', plinth:'#d8d1c4', items:[], az:0, el:6, dist:300, ty:40, fov:22, tx:0, keyPos:[-160,220,120]}, o);
+  studio.clear(); outer.visible = false; trio.visible = false; studio.visible = true;
+  const col = new THREE.Color(o.bg);
+  renderer.setClearColor(col, 1);
+  ground.visible = false;
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(4000, 4000), new THREE.ShadowMaterial({opacity:o.shadow || 0.2}));
+  floor.rotation.x = -Math.PI/2; floor.receiveShadow = true; studio.add(floor);
+  const pm = new THREE.MeshStandardMaterial({color:new THREE.Color(o.plinth), roughness:0.95, envMapIntensity:0.35});
+  o.items.forEach(it => {
+    const h = it.h || 0;
+    if(h > 0){
+      const r = it.r || 34;
+      const geo = it.box ? new THREE.BoxGeometry(r*2, h, r*2) : new THREE.CylinderGeometry(r, r, h, 96);
+      const pl = new THREE.Mesh(geo, pm); pl.position.set(it.x, h/2, it.z || 0); pl.castShadow = pl.receiveShadow = true; studio.add(pl);
+    }
+    const w = new THREE.Group(); const g = standing(it.f);
+    if(it.flat){ g.rotation.x = -Math.PI/2; w.position.set(it.x, h, it.z||0); }
+    else { w.position.set(it.x, h + 24.2, it.z || 0); }
+    w.rotation.y = (it.ry || 0)*Math.PI/180; w.add(g); studio.add(w);
+  });
+  key.position.set(...o.keyPos);
+  Object.assign(key.shadow.camera, {left:-400, right:400, top:400, bottom:-400, near:10, far:2000}); key.shadow.camera.updateProjectionMatrix();
+  key.shadow.radius = 16; key.intensity = o.key || 1.0;
+  camera.fov = o.fov; camera.updateProjectionMatrix();
+  const a = o.az*Math.PI/180, e = o.el*Math.PI/180;
+  camera.position.set(o.tx + o.dist*Math.cos(e)*Math.sin(a), o.ty + o.dist*Math.sin(e), o.dist*Math.cos(e)*Math.cos(a));
+  camera.lookAt(o.tx, o.ty, 0);
+  renderer.render(scene, camera);
+  const url = canvas.toDataURL('image/jpeg', 0.94);
+  renderer.setClearColor(0x000000, 0); studio.visible = false; outer.visible = true; ground.visible = true;
+  return url;
+};
 window.ready = true;
 </script>
 </body></html>

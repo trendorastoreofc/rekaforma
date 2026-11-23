@@ -9,9 +9,9 @@
 
   var RF = window.RF = window.RF || {};
   RF.CATALOG = {
-    'flower-sun': { flower: 'sun', name: 'Sunflower Clicker', short: 'Sunflower', price: 1500, tint: '#ffd45c', dot: '#f2b61c', line: 'Yellow petals, brown seed head, green band' },
-    'flower-sak': { flower: 'sak', name: 'Sakura Clicker', short: 'Sakura', price: 1500, tint: '#f8bfc9', dot: '#f2a9bf', line: 'Blush petals, deep pink centre, white band' },
-    'flower-dai': { flower: 'dai', name: 'Daisy Clicker', short: 'Daisy', price: 1500, tint: '#d3e6b8', dot: '#f4f1e8', line: 'White petals, yellow button, green band' }
+    'flower-sun': { flower: 'sun', name: 'Flower Clicker, Sunflower', short: 'Sunflower', price: 1500, tint: '#dcd6cb', dot: '#f2b61c', line: 'Yellow petals, brown seed head, green band' },
+    'flower-sak': { flower: 'sak', name: 'Flower Clicker, Sakura', short: 'Sakura', price: 1500, tint: '#dcd6cb', dot: '#f4b6c8', line: 'Blush petals, deep pink centre, white band' },
+    'flower-dai': { flower: 'dai', name: 'Flower Clicker, Daisy', short: 'Daisy', price: 1500, tint: '#dcd6cb', dot: '#f4f1e8', line: 'White petals, yellow centre, green band' }
   };
   RF.idFor = function (f) { return 'flower-' + f; };
   RF.img = function (id, view) { return 'assets/img/flower/' + RF.CATALOG[id].flower + '_' + (view || 'top') + '.webp'; };
@@ -49,7 +49,7 @@
     drawer = document.createElement('aside'); drawer.className = 'drawer'; drawer.setAttribute('aria-label', 'Your bag'); drawer.setAttribute('aria-hidden', 'true');
     drawer.innerHTML =
       '<div class="drawer-head"><h2>Your bag</h2>' +
-      '<button class="icon-btn" type="button" data-close aria-label="Close bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
+      '<button class="icon-btn" type="button" data-close aria-label="Close bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
       '<div class="drawer-body"></div><div class="drawer-foot"></div>';
     document.body.appendChild(scrim); document.body.appendChild(drawer);
     body = $('.drawer-body', drawer); foot = $('.drawer-foot', drawer);
@@ -61,7 +61,7 @@
     var p = RF.CATALOG[l.id];
     return '<div class="line" style="--tint:' + p.tint + '">' +
       '<img src="' + RF.img(l.id) + '" alt="" width="76" height="76">' +
-      '<div><h3>' + p.name + '</h3><div class="unit">' + RF.rm(p.price) + ' each</div></div>' +
+      '<div><h3>' + p.name + '</h3><div class="unit">' + RF.rm(p.price) + '</div></div>' +
       '<div class="end"><span class="amt">' + RF.rm(p.price * l.qty) + '</span>' +
       (editable
         ? '<span class="stepper"><button type="button" data-dec="' + l.id + '" aria-label="One fewer ' + p.short + '">−</button><output>' + l.qty + '</output><button type="button" data-inc="' + l.id + '" aria-label="One more ' + p.short + '">+</button></span>'
@@ -72,15 +72,15 @@
     if (!drawer) return;
     var items = RF.cart.items();
     if (!items.length) {
-      body.innerHTML = '<div class="empty"><span class="logo-mark" aria-hidden="true"></span><p>Your bag is empty.</p><a class="btn alt" href="product.html">Pick a flower</a></div>';
+      body.innerHTML = '<div class="empty"><p>Your bag is empty.</p><a class="link" href="product.html">Shop Series 01</a></div>';
       foot.innerHTML = '';
       return;
     }
     body.innerHTML = items.map(function (l) { return RF.lineHTML(l, true); }).join('');
     foot.innerHTML =
-      '<dl class="totals"><dt>Subtotal</dt><dd>' + RF.rm(RF.cart.subtotal()) + '</dd><dt class="small">Shipping</dt><dd class="small">Next step</dd></dl>' +
+      '<dl class="totals"><dt>Subtotal</dt><dd>' + RF.rm(RF.cart.subtotal()) + '</dd><dt class="small">Delivery</dt><dd class="small">Calculated at checkout</dd></dl>' +
       '<a class="btn block" href="checkout.html">Checkout · ' + RF.rm(RF.cart.subtotal()) + '</a>' +
-      '<div class="pays" aria-label="Payment methods"><span>FPX</span><span>CARD</span><span>GRABPAY</span></div>';
+      '<div class="pays" aria-label="Payment methods"><span>FPX</span><span>Visa</span><span>Mastercard</span><span>GrabPay</span></div>';
   }
   document.addEventListener('click', function (e) {
     var t = e.target.closest('[data-inc],[data-dec],[data-open-bag]');
@@ -112,7 +112,6 @@
 
   RF.addToBag = function (id, qty) {
     RF.cart.add(id, qty);
-    RF.click(true); setTimeout(function () { RF.click(false); }, 90);
     RF.openBag();
   };
 

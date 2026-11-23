@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Checkout · Rekaforma</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#ffed9f">
+<meta name="theme-color" content="#eeeae3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 
 <header class="header">
-  <div class="wrap" style="grid-template-columns:1fr auto 1fr">
-    <a class="small" href="product.html" style="justify-self:start;text-decoration:none">← Shop</a>
-    <a class="brand" href="index.html" aria-label="Rekaforma home" style="grid-column:2;justify-self:center"><span class="logo" aria-hidden="true"></span></a>
-    <span></span>
+  <div class="wrap">
+    <a class="text-btn" href="product.html" style="justify-self:start;grid-column:1;grid-row:1">← Shop</a>
+    <a class="brand" href="index.html" aria-label="Rekaforma home"><span class="logo" aria-hidden="true"></span></a>
+    <span style="grid-column:3"></span>
   </div>
 </header>
 
@@ -35,7 +35,7 @@
           </div>
         </section>
         <section class="panel">
-          <h2>Deliver to</h2>
+          <h2>Delivery address</h2>
           <div class="fields">
             <div class="f full"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required><span class="err"></span></div>
             <div class="f full"><label for="line1">Address</label><input id="line1" name="line1" autocomplete="address-line1" placeholder="House number and street" required><span class="err"></span></div>
@@ -56,19 +56,17 @@
     </form>
 
     <aside class="summary">
-      <div class="panel">
         <h2>Your order</h2>
-        <div id="lines" style="display:grid;gap:10px"></div>
+        <div id="lines"></div>
         <dl class="totals">
           <dt>Subtotal</dt><dd id="tSub">RM0</dd>
-          <dt>Shipping <span class="small" id="tZone"></span></dt><dd id="tShip">Choose a state</dd>
+          <dt>Delivery <span class="small" id="tZone"></span></dt><dd id="tShip">Choose a state</dd>
           <dt class="grand">Total</dt><dd class="grand" id="tTotal">RM0</dd>
         </dl>
         <button class="btn block" type="submit" form="co" id="payBtn">Pay securely</button>
-        <div class="pays" aria-label="Payment methods"><span>FPX</span><span>CARD</span><span>GRABPAY</span></div>
+        <div class="pays" aria-label="Payment methods"><span>FPX</span><span>Visa</span><span>Mastercard</span><span>GrabPay</span></div>
         <p class="small" style="margin:0;text-align:center">You will pay on Stripe's secure page, then come back here.</p>
         <div class="notice" id="notice" hidden></div>
-      </div>
     </aside>
   </div>
 </main>
@@ -89,7 +87,7 @@
     var items = RF.cart.items();
     document.getElementById('lines').innerHTML = items.length
       ? items.map(function (l) { return RF.lineHTML(l, true); }).join('')
-      : '<div class="empty"><p>Your bag is empty.</p><a class="btn alt" href="product.html">Pick a flower</a></div>';
+      : '<div class="empty"><p>Your bag is empty.</p><a class="link" href="product.html">Shop Series 01</a></div>';
     var sub = RF.cart.subtotal(), z = zone(), ship = z ? cfg.shipping[z].price : null;
     document.getElementById('tSub').textContent = RF.rm(sub);
     document.getElementById('tZone').textContent = z ? '· ' + cfg.shipping[z].label : '';

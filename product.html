@@ -5,78 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Flower Clicker · Rekaforma</title>
 <meta name="description" content="The Flower Clicker: a 3D printed flower with a mechanical keyboard switch inside. Sunflower, Sakura or Daisy. RM15.">
-<meta name="theme-color" content="#ffed9f">
+<meta name="theme-color" content="#eeeae3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="tick" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="currentColor"/><path d="M6.5 11.2l3 3 6-6.4" fill="none" stroke="#fff8e4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-</svg>
-
-<div class="announce">Printed to order in Kuala Lumpur. Ships in <b>[X]</b> working days.</div>
+<div class="announce">Printed to order in Kuala Lumpur · Ships in [X] working days</div>
 
 <header class="header">
   <div class="wrap">
-    <button class="icon-btn menu-btn" type="button" aria-label="Menu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
-    </button>
-    <a class="brand" href="index.html" aria-label="Rekaforma home"><span class="logo" aria-hidden="true"></span></a>
+    <button class="text-btn menu-btn" type="button" aria-expanded="false">Menu</button>
     <nav class="nav" aria-label="Main">
       <a href="product.html" aria-current="page">Shop</a>
-      <a href="index.html#series">Flowers</a>
-      <a href="index.html#next">Photo Strip<span class="soon">Soon</span></a>
-      <a href="index.html#studio">Studio</a>
+      <a href="index.html#series-01">Series 01</a>
+      <a href="index.html#approach">Studio</a>
+      <a href="index.html#next">Upcoming<span class="soon">02</span></a>
     </nav>
+    <a class="brand" href="index.html" aria-label="Rekaforma home"><span class="logo" aria-hidden="true"></span></a>
     <div class="tools">
-      <button class="icon-btn" type="button" data-open-bag aria-label="Open bag">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-        <span class="bag-count" data-n="0">0</span>
-      </button>
+      <button class="text-btn" type="button" data-open-bag>Bag (<span class="bag-count">0</span>)</button>
     </div>
   </div>
 </header>
 
 <main class="wrap">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="index.html#series">Flowers</a><span aria-hidden="true">/</span><span id="crumbName">Sunflower Clicker</span></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="index.html#series-01">Series 01</a><span aria-hidden="true">/</span><span id="crumbName">Flower Clicker</span></nav>
 
   <div class="pdp">
     <div class="gallery">
-      <div class="viewer" id="viewer" role="img" aria-label="Sunflower Clicker, drag to turn it around">
-        <img id="viewImg" src="assets/img/spin/sun_00.webp" alt="" width="720" height="720">
+      <div class="viewer" id="viewer" role="img" aria-label="Flower Clicker, Sunflower. Drag to turn it around.">
+        <img id="viewImg" src="assets/img/studio/card_sun.webp" alt="" width="1200" height="1500" class="cover">
         <span class="loading" id="loading"></span>
         <span class="hint" aria-hidden="true">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8c0-2 2.7-3.5 6-3.5S14 6 14 8s-2.7 3.5-6 3.5"/><path d="M6 9.5L8 11.5 6 13.5"/></svg>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 8c0-2 2.7-3.5 6-3.5S14 6 14 8s-2.7 3.5-6 3.5"/><path d="M6 9.5L8 11.5 6 13.5"/></svg>
           Drag to turn
         </span>
       </div>
       <div class="thumbs" role="group" aria-label="Views">
-        <button type="button" class="t360" data-v="spin" aria-pressed="true">360°</button>
-        <button type="button" data-v="top" aria-pressed="false" aria-label="Front view"><img alt="" src="assets/img/flower/sun_top.webp"></button>
-        <button type="button" data-v="hero" aria-pressed="false" aria-label="Angled view"><img alt="" src="assets/img/flower/sun_hero.webp"></button>
-        <button type="button" data-v="side" aria-pressed="false" aria-label="Side view"><img alt="" src="assets/img/flower/sun_side.webp"></button>
-        <button type="button" data-v="exploded" aria-pressed="false" aria-label="Parts view"><img alt="" src="assets/img/flower/sun_exploded.webp"></button>
+        <button type="button" data-v="studio" aria-pressed="true" aria-label="On a plinth"><img class="cover" alt="" src="assets/img/studio/card_sun.webp"></button>
+        <button type="button" class="t360" data-v="spin" aria-pressed="false">360°</button>
+        <button type="button" data-v="top" aria-pressed="false" aria-label="Front"><img alt="" src="assets/img/flower/sun_top.webp"></button>
+        <button type="button" data-v="hero" aria-pressed="false" aria-label="Angle"><img alt="" src="assets/img/flower/sun_hero.webp"></button>
+        <button type="button" data-v="side" aria-pressed="false" aria-label="Side"><img alt="" src="assets/img/flower/sun_side.webp"></button>
+        <button type="button" data-v="exploded" aria-pressed="false" aria-label="Parts"><img alt="" src="assets/img/flower/sun_exploded.webp"></button>
       </div>
     </div>
 
     <div class="buy">
       <div>
-        <span class="eyebrow">Series 01 · Flower Clicker</span>
-        <h1 id="pName">Sunflower</h1>
+        <span class="label">Series 01</span>
+        <h1>Flower Clicker</h1>
       </div>
-      <div class="price"><span id="pPrice">RM15</span><small>Keyring loop included</small></div>
-      <p class="lede" id="pLine" style="font-size:17px">Yellow petals, brown seed head, green band. The same flower on both sides with a mechanical switch in the middle.</p>
+      <div class="price" id="pPrice">RM15</div>
+      <p class="body" id="pLine" style="font-size:16px">A mechanical keyboard switch set inside a flower. Press the petals and the face travels 4 mm, then springs back. The same flower on both sides, with a loop for your keys.</p>
 
       <div class="opt">
-        <div class="opt-label"><span>Flower</span><b id="optName">Sunflower</b></div>
+        <div class="opt-label"><span>Flower</span><b id="optName" style="font-weight:500">Sunflower</b></div>
         <div class="variants" role="group" aria-label="Flower">
-          <button type="button" data-f="sun" aria-pressed="true" style="--tint:var(--t-sun)"><img src="assets/img/flower/sun_top.webp" alt="">Sunflower</button>
-          <button type="button" data-f="sak" aria-pressed="false" style="--tint:var(--t-sak)"><img src="assets/img/flower/sak_top.webp" alt="">Sakura</button>
-          <button type="button" data-f="dai" aria-pressed="false" style="--tint:var(--t-dai)"><img src="assets/img/flower/dai_top.webp" alt="">Daisy</button>
+          <button type="button" data-f="sun" aria-pressed="true"><i style="background:#f2b61c"></i>Sunflower</button>
+          <button type="button" data-f="sak" aria-pressed="false"><i style="background:#f4b6c8"></i>Sakura</button>
+          <button type="button" data-f="dai" aria-pressed="false"><i style="background:#f4f1e8"></i>Daisy</button>
         </div>
       </div>
 
@@ -89,71 +81,63 @@
         <button class="btn" type="button" id="addBtn">Add to bag · RM15</button>
       </div>
 
-      <ul class="ticks">
-        <li><svg aria-hidden="true"><use href="#tick"/></svg>Mechanical MX switch, 4 mm of travel</li>
-        <li><svg aria-hidden="true"><use href="#tick"/></svg>Same flower on both faces</li>
-        <li><svg aria-hidden="true"><use href="#tick"/></svg>Printed in PLA, one colour per part, no paint</li>
-        <li><svg aria-hidden="true"><use href="#tick"/></svg>Pay with FPX online banking, card or GrabPay</li>
-      </ul>
+      <div class="hear">
+        <p>Hold the button to hear the switch.</p>
+        <button type="button" id="hearBtn" aria-label="Press to hear the switch click">PRESS</button>
+      </div>
 
       <div class="acc">
         <details open>
-          <summary>Size and details</summary>
-          <div class="body">
+          <summary>Dimensions</summary>
+          <div class="content">
             <dl class="spec">
-              <dt>Across the petals</dt><dd>48 mm</dd>
-              <dt>Thickness, at rest / pressed</dt><dd id="sThick">29.1 / 25.1 mm</dd>
-              <dt>Height with keyring loop</dt><dd>54 mm</dd>
+              <dt>Diameter</dt><dd>48 mm</dd>
+              <dt>Depth, at rest / pressed</dt><dd id="sThick">29.1 / 25.1 mm</dd>
+              <dt>Height with key loop</dt><dd>54 mm</dd>
+              <dt>Key travel</dt><dd>4.0 mm</dd>
               <dt>Weight</dt><dd>[X] g</dd>
-              <dt>Switch</dt><dd>MX style, [switch type]</dd>
             </dl>
           </div>
         </details>
         <details>
-          <summary>What is inside</summary>
-          <div class="body">
-            <p>Five printed parts: front petals, back petals, two centres and a thin band. The centres are separate prints glued into their pockets, so the colour edge is clean instead of painted.</p>
-            <p>The switch is a standard mechanical keyboard switch. Press the front and the whole face moves down 4 mm, closing the band.</p>
+          <summary>Materials and construction</summary>
+          <div class="content">
+            <p>Five parts printed in PLA, one colour each: front petals, back petals, two centres and a thin band. The centres are glued into their own pockets, so every colour edge is crisp and nothing is painted.</p>
+            <p>Inside is a standard MX-style mechanical switch ([switch type]).</p>
           </div>
         </details>
         <details>
           <summary>Care</summary>
-          <div class="body"><p>PLA softens in heat, so keep it off a car dashboard in the afternoon sun. Wipe clean with a damp cloth.</p></div>
+          <div class="content"><p>PLA softens in heat. Keep it out of a parked car in the afternoon sun. Wipe clean with a damp cloth.</p></div>
         </details>
         <details>
-          <summary>Shipping and returns</summary>
-          <div class="body"><p>[Shipping rates, areas and return policy go here.]</p></div>
+          <summary>Delivery and returns</summary>
+          <div class="content"><p>[Delivery rates, areas and return policy go here.]</p></div>
         </details>
       </div>
     </div>
   </div>
 
-  <section class="section" style="padding-top:clamp(40px,6vw,80px)">
-    <div class="section-head">
-      <div><span class="eyebrow">Also in the series</span><h2 class="h2">Make it a <span class="hl">bunch.</span></h2></div>
-    </div>
+  <section class="section" style="padding-top:clamp(56px,8vw,112px)">
+    <div class="rule-head"><h2 class="h2">Complete the series</h2></div>
     <div class="grid-3" id="also"></div>
   </section>
 </main>
 
 <div class="sticky-buy" id="stickyBuy">
-  <div><span class="eyebrow">Flower Clicker</span><br><b id="stickyName">Sunflower</b></div>
+  <div><span class="label">Flower Clicker</span><br><span id="stickyName">Sunflower</span></div>
   <button class="btn" type="button" id="stickyAdd">Add · RM15</button>
 </div>
 
 <footer class="footer">
   <div class="wrap">
     <div class="top">
-      <div style="display:grid;gap:14px;max-width:34ch">
-        <h4>Rekaforma</h4>
-        <p style="margin:0">Designed objects, 3D printed in Kuala Lumpur.</p>
-      </div>
-      <div><h4>Shop</h4><ul><li><a href="#sun">Sunflower</a></li><li><a href="#sak">Sakura</a></li><li><a href="#dai">Daisy</a></li></ul></div>
-      <div><h4>Help</h4><ul><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div class="sig" aria-label="Rekaforma"><span class="logo-mark" aria-hidden="true"></span><span class="logo" aria-hidden="true"></span></div>
+      <div><h4>Shop</h4><ul><li><a href="product.html">Series 01</a></li><li><a href="index.html#next">Upcoming</a></li></ul></div>
+      <div><h4>Help</h4><ul><li><a href="#">Delivery</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact</a></li></ul></div>
       <div><h4>Follow</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li></ul></div>
     </div>
-    <span class="logo" aria-hidden="true"></span>
-    <div class="bottom"><span>© <span data-year>2026</span> Rekaforma. Kuala Lumpur, Malaysia.</span><span>Designed with purpose.</span></div>
+    <div class="bottom"><span>© <span data-year>2026</span> Rekaforma, Kuala Lumpur</span><span>Designed with purpose</span></div>
   </div>
 </footer>
 
@@ -163,48 +147,56 @@
   'use strict';
   var FRAMES = 36, FL = ['sun', 'sak', 'dai'];
   var thick = { sun: '29.1 / 25.1 mm', sak: '30.0 / 26.0 mm', dai: '28.9 / 24.9 mm' };
-  var state = { f: 'sun', view: 'spin', frame: 0, qty: 1 };
+  var state = { f: 'sun', view: 'studio', frame: 0, qty: 1 };
   var viewer = document.getElementById('viewer'), img = document.getElementById('viewImg'), loading = document.getElementById('loading');
   var cache = {};
   function P() { return RF.CATALOG[RF.idFor(state.f)]; }
   function src(f, i) { return 'assets/img/spin/' + f + '_' + String(i).padStart(2, '0') + '.webp'; }
+  function viewSrc(f, v) { return v === 'studio' ? 'assets/img/studio/card_' + f + '.webp' : 'assets/img/flower/' + f + '_' + v + '.webp'; }
   function preload(f) {
     if (cache[f]) return;
-    cache[f] = []; var done = 0; loading.textContent = 'Loading 360°';
+    cache[f] = []; var done = 0; loading.textContent = 'Loading';
     for (var i = 0; i < FRAMES; i++) {
       var im = new Image();
       im.onload = im.onerror = function () { if (++done === FRAMES && state.f === f) loading.textContent = ''; };
       im.src = src(f, i); cache[f].push(im);
     }
   }
-  function paint() { img.src = state.view === 'spin' ? src(state.f, state.frame) : 'assets/img/flower/' + state.f + '_' + state.view + '.webp'; }
+  function paint() {
+    img.src = state.view === 'spin' ? src(state.f, state.frame) : viewSrc(state.f, state.view);
+    img.classList.toggle('cover', state.view === 'studio');
+    viewer.classList.toggle('still', state.view !== 'spin');
+  }
   function paintButtons() {
     var total = RF.rm(P().price * state.qty);
     document.getElementById('addBtn').textContent = 'Add to bag · ' + total;
     document.getElementById('stickyAdd').textContent = 'Add · ' + total;
   }
-
   function setFlower(f, push) {
     if (FL.indexOf(f) < 0) return;
     state.f = f; var p = P();
-    document.documentElement.style.setProperty('--tint', p.tint);
-    ['pName', 'optName', 'stickyName'].forEach(function (id) { document.getElementById(id).textContent = p.short; });
-    document.getElementById('crumbName').textContent = p.name;
+    document.getElementById('optName').textContent = p.short;
+    document.getElementById('stickyName').textContent = p.short;
+    document.getElementById('crumbName').textContent = 'Flower Clicker, ' + p.short;
     document.getElementById('pPrice').textContent = RF.rm(p.price);
-    document.getElementById('pLine').textContent = p.line + '. The same flower on both sides with a mechanical switch in the middle.';
     document.getElementById('sThick').textContent = thick[f];
-    viewer.setAttribute('aria-label', p.name + ', drag to turn it around');
+    viewer.setAttribute('aria-label', p.name + '. Drag to turn it around.');
     document.querySelectorAll('.variants button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.f === f); });
-    document.querySelectorAll('.thumbs button[data-v]:not(.t360) img').forEach(function (im) { im.src = 'assets/img/flower/' + f + '_' + im.parentNode.dataset.v + '.webp'; });
+    document.querySelectorAll('.thumbs button:not(.t360) img').forEach(function (im) { im.src = viewSrc(f, im.parentNode.dataset.v); });
     document.title = p.name + ' · Rekaforma';
     if (push) { try { history.replaceState(null, '', '#' + f); } catch (e) {} }
-    preload(f); paint(); paintButtons(); renderAlso();
+    paint(); paintButtons(); renderAlso();
   }
 
-  /* drag to turn */
+  function setView(v) {
+    state.view = v;
+    document.querySelectorAll('.thumbs button').forEach(function (x) { x.setAttribute('aria-pressed', x.dataset.v === v); });
+    if (v === 'spin') preload(state.f);
+    paint();
+  }
   var dragging = false, lastX = 0, acc = 0;
   viewer.addEventListener('pointerdown', function (e) {
-    if (state.view !== 'spin') return;
+    if (state.view !== 'spin') setView('spin');
     dragging = true; lastX = e.clientX; viewer.classList.add('used');
     try { viewer.setPointerCapture(e.pointerId); } catch (err) {}
   });
@@ -221,13 +213,7 @@
     state.frame = (state.frame + 1) % FRAMES; paint();
   }, 140);
 
-  document.querySelectorAll('.thumbs button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      state.view = b.dataset.v;
-      document.querySelectorAll('.thumbs button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
-      paint();
-    });
-  });
+  document.querySelectorAll('.thumbs button').forEach(function (b) { b.addEventListener('click', function () { setView(b.dataset.v); }); });
   document.querySelectorAll('.variants button').forEach(function (b) { b.addEventListener('click', function () { setFlower(b.dataset.f, true); }); });
 
   var qOut = document.getElementById('qOut');
@@ -236,6 +222,15 @@
   function add() { RF.addToBag(RF.idFor(state.f), state.qty); }
   document.getElementById('addBtn').onclick = add;
   document.getElementById('stickyAdd').onclick = add;
+
+  /* hold to hear the switch */
+  var hb = document.getElementById('hearBtn'), down = false;
+  function press() { if (down) return; down = true; hb.classList.add('down'); RF.click(true); }
+  function release() { if (!down) return; down = false; hb.classList.remove('down'); RF.click(false); }
+  hb.addEventListener('pointerdown', function (e) { e.preventDefault(); press(); });
+  window.addEventListener('pointerup', release); hb.addEventListener('pointerleave', release);
+  hb.addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); press(); } });
+  hb.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Enter') release(); });
 
   var sticky = document.getElementById('stickyBuy');
   if ('IntersectionObserver' in window) {
@@ -246,14 +241,12 @@
   function renderAlso() {
     var box = document.getElementById('also'); box.innerHTML = '';
     FL.filter(function (k) { return k !== state.f; }).forEach(function (k) {
-      var id = RF.idFor(k), p = RF.CATALOG[id];
-      var d = document.createElement('div'); d.className = 'card'; d.style.setProperty('--tint', p.tint);
-      d.innerHTML = '<a class="media" href="#' + k + '" tabindex="-1" aria-hidden="true"><img class="main" src="assets/img/flower/' + k + '_top.webp" alt="" loading="lazy">' +
-        '<img class="alt" src="assets/img/flower/' + k + '_hero.webp" alt="" loading="lazy"></a>' +
-        '<div class="info"><div class="row"><h3><a href="#' + k + '">' + p.short + '</a></h3><span class="price">' + RF.rm(p.price) + '</span></div><p>' + p.line + '.</p>' +
-        '<button class="btn block quick" type="button">Add to bag</button></div>';
-      d.querySelector('button').addEventListener('click', function () { RF.addToBag(id, 1); });
-      box.appendChild(d);
+      var p = RF.CATALOG[RF.idFor(k)];
+      var a = document.createElement('article'); a.className = 'card';
+      a.innerHTML = '<a class="media" href="#' + k + '" tabindex="-1" aria-hidden="true"><img class="main" src="assets/img/studio/card_' + k + '.webp" alt="" loading="lazy">' +
+        '<img class="alt" src="assets/img/flower/' + k + '_top.webp" alt="" loading="lazy"></a>' +
+        '<div><div class="row"><h3><a href="#' + k + '">' + p.name + '</a></h3><span class="price">' + RF.rm(p.price) + '</span></div><p>' + p.line + '</p></div>';
+      box.appendChild(a);
     });
   }
 

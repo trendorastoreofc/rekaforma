@@ -12,7 +12,8 @@ python3 -m http.server 8000
 - `shop-config.json` prices (in sen) and shipping rates; the server reads prices from here, never from the browser
 - `functions/api/checkout.js` Cloudflare Pages Function that opens a Stripe Checkout session (FPX, card, GrabPay)
 - `assets/img/logo-*.svg` logo traced from the brand PNGs, recoloured with CSS masks
-- `assets/img/flower` product renders, `assets/img/spin` 36-frame 360° turns
+- `assets/img/studio` plinth and close-up renders on the stone backdrop
+- `assets/img/flower` product renders on transparent backgrounds, `assets/img/spin` 36-frame 360° turns
 - `tools/render` the scripts that made the renders from the Flower Clicker 3D model. They need `parts.js` (the model data exported from the Flower Clicker artifact, not committed: 10 MB) and `three@0.147.0` installed beside them.
 
 ## Going live
