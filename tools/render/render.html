@@ -1,0 +1,111 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:transparent}canvas{display:block}</style>
+</head><body>
+<canvas id="c"></canvas>
+<script src="node_modules/three/build/three.min.js"></script>
+<script src="node_modules/three/examples/js/environments/RoomEnvironment.js"></script>
+<script src="parts.js"></script>
+<script>
+const W = +new URLSearchParams(location.search).get('w') || 1600;
+const H = +new URLSearchParams(location.search).get('h') || 1600;
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);
+renderer.setSize(W, H, false);
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.NoToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.setClearColor(0x000000, 0);
+THREE.ColorManagement.legacyMode = false;
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
+
+const camera = new THREE.PerspectiveCamera(24, W/H, 1, 4000);
+const key = new THREE.DirectionalLight(0xffffff, 1.25);
+key.position.set(-40, 200, 60); key.castShadow = true;
+key.shadow.mapSize.set(4096, 4096);
+Object.assign(key.shadow.camera, {left:-90, right:90, top:90, bottom:-90, near:10, far:600});
+key.shadow.bias = -0.0004; key.shadow.normalBias = 0.3; key.shadow.radius = 8;
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xfff4e6, 0.35); fill.position.set(120, 60, 40); scene.add(fill);
+
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), new THREE.ShadowMaterial({opacity:0.16}));
+ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
+
+function b64(s, T){ const bin = atob(s); const u = new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i] = bin.charCodeAt(i); return new T(u.buffer); }
+const s2l = c => { c /= 255; return c <= 0.04045 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); };
+function geom(k){
+  const d = PARTS[k]; const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(b64(d.v, Float32Array), 3));
+  g.setAttribute('normal', new THREE.BufferAttribute(b64(d.n, Int8Array), 3, true));
+  g.setIndex(new THREE.BufferAttribute(b64(d.i, d.i32 ? Uint32Array : Uint16Array), 1));
+  if(d.c){ const c8 = b64(d.c, Uint8Array), cf = new Float32Array(c8.length); for(let i=0;i<c8.length;i++) cf[i] = s2l(c8[i]);
+    g.setAttribute('color', new THREE.BufferAttribute(cf, 3)); }
+  return g;
+}
+const print = new THREE.MeshStandardMaterial({vertexColors:true, roughness:0.55, metalness:0, envMapIntensity:0.45});
+const swMat = {
+  sw_housing: new THREE.MeshPhysicalMaterial({color:0xe8eef4, roughness:0.15, transparent:true, opacity:0.6, side:THREE.DoubleSide}),
+  sw_pins: new THREE.MeshStandardMaterial({color:0xc9a25a, roughness:0.3, metalness:0.7}),
+  sw_stem: new THREE.MeshStandardMaterial({color:0x2b8ce6, roughness:0.4})
+};
+const outer = new THREE.Group(); scene.add(outer);
+const flip = new THREE.Group(); flip.position.y = 15.15; outer.add(flip);
+const root = new THREE.Group(); root.rotation.x = -Math.PI/2; root.position.y = -15.15; flip.add(root);
+const P = {};
+function add(k, mat){ const m = new THREE.Mesh(geom(k), mat); m.castShadow = true; m.receiveShadow = true; const g = new THREE.Group(); g.add(m); root.add(g); P[k] = g; }
+['sw_housing','sw_pins','sw_stem'].forEach(k => add(k, swMat[k]));
+['sun','sak','dai'].forEach(f => ['base','base_ins','cap','cap_ins','ring'].forEach(s => { if(PARTS[f+'_'+s]) add(f+'_'+s, print); }));
+
+const EX = {sw:14, ring:24, cap:36, cap_ins:50, base_ins:-12};
+window.shot = function(o){
+  o = Object.assign({flower:'sun', az:25, el:38, dist:175, ex:0, sw:false, flipped:false, ty:15, spin:0, stand:false, fov:24}, o);
+  Object.keys(P).forEach(k => P[k].visible = k.startsWith(o.flower) || (o.sw && k.startsWith('sw_')));
+  const sw = EX.sw*o.ex;
+  ['sw_housing','sw_pins','sw_stem'].forEach(k => P[k].position.z = sw);
+  P[o.flower+'_cap'].position.z = EX.cap*o.ex;
+  P[o.flower+'_ring'].position.z = EX.ring*o.ex;
+  P[o.flower+'_cap_ins'].position.z = EX.cap_ins*o.ex;
+  P[o.flower+'_base_ins'].position.z = EX.base_ins*o.ex;
+  flip.rotation.set(0, 0, o.flipped ? Math.PI : 0);
+  outer.rotation.set(0, o.spin*Math.PI/180, 0);
+  outer.position.set(0, 0, 0);
+  if(o.stand){ // stand the clicker on its edge, face toward +z
+    flip.rotation.set(Math.PI/2, 0, 0); outer.position.y = 24 - 15.15 + 0; flip.position.y = 15.15;
+    outer.position.y = 24 - 15.15 + 0.2;
+  }
+  camera.fov = o.fov; camera.updateProjectionMatrix();
+  const a = o.az*Math.PI/180, e = o.el*Math.PI/180;
+  camera.position.set(o.dist*Math.cos(e)*Math.sin(a), o.ty + o.dist*Math.sin(e), o.dist*Math.cos(e)*Math.cos(a));
+  camera.lookAt(0, o.ty, 0);
+  renderer.render(scene, camera);
+  return canvas.toDataURL('image/png');
+};
+
+// trio: three standing clickers side by side
+const trio = new THREE.Group(); trio.visible = false; scene.add(trio);
+[['sak',-58,-18,10],['sun',0,6,-6],['dai',58,-18,-22]].forEach(([f,x,z,ry]) => {
+  const g = new THREE.Group();
+  ['base','base_ins','cap','cap_ins','ring'].forEach(s => { const m = new THREE.Mesh(geom(f+'_'+s), print); m.castShadow = m.receiveShadow = true; g.add(m); });
+  g.rotation.x = 0; // part coords: z is thickness, so standing = no rotation (y up is in-plane)
+  const w = new THREE.Group(); w.add(g); w.position.set(x, 24.2, z); w.rotation.y = ry*Math.PI/180; trio.add(w);
+});
+window.trioShot = function(o){
+  o = Object.assign({az:0, el:12, dist:330, ty:26, fov:24}, o);
+  outer.visible = false; trio.visible = true;
+  camera.fov = o.fov; camera.updateProjectionMatrix();
+  const a = o.az*Math.PI/180, e = o.el*Math.PI/180;
+  camera.position.set(o.dist*Math.cos(e)*Math.sin(a), o.ty + o.dist*Math.sin(e), o.dist*Math.cos(e)*Math.cos(a));
+  camera.lookAt(0, o.ty, 0);
+  renderer.render(scene, camera);
+  outer.visible = true; trio.visible = false;
+  return canvas.toDataURL('image/png');
+};
+window.ready = true;
+</script>
+</body></html>
