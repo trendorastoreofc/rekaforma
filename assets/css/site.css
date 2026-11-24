@@ -414,3 +414,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .photos figure + figure { grid-template-rows: 1fr auto; }
 .photo-slot { display: grid; place-content: center; justify-items: center; gap: 10px; text-align: center; border: 1px dashed rgba(30, 27, 24, .3); color: var(--ink-2); font-size: 15px; }
 @media (max-width: 760px) { .photos { grid-template-columns: 1fr; } .photos figure + figure .photo-slot, .photos figure + figure img { aspect-ratio: 4 / 3; height: auto; } }
+/* social links with their icons */
+.social { display: inline-flex; align-items: center; gap: 10px; }
+.social .si { width: 16px; height: 16px; flex: none; }
+.socials { display: flex; flex-wrap: wrap; gap: 12px; }
+.socials .social { border: 1px solid var(--line); padding: 10px 16px; min-height: 44px; text-decoration: none; font-size: 15px; transition: border-color .2s; }
+.socials .social:hover { border-color: var(--ink); }
