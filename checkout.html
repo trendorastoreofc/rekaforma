@@ -89,14 +89,14 @@
     document.getElementById('lines').innerHTML = items.length
       ? items.map(function (l) { return RF.lineHTML(l, true); }).join('')
       : '<div class="empty"><p>Your bag is empty.</p><a class="link" href="product.html">Shop Series 01</a></div>';
-    var sub = RF.cart.subtotal(), z = zone(), free = cfg && cfg.freeOver != null && sub >= cfg.freeOver;
-    var ship = free ? 0 : z ? cfg.shipping[z].price : null;
+    var sub = RF.cart.subtotal(), z = zone(), over = cfg && cfg.freeOver != null && sub >= cfg.freeOver;
+    var ship = z ? (over && cfg.shipping[z].priceOver != null ? cfg.shipping[z].priceOver : cfg.shipping[z].price) : null;
     document.getElementById('tSub').textContent = RF.rm(sub);
     document.getElementById('tZone').textContent = z ? '· ' + cfg.shipping[z].label : '';
-    document.getElementById('tShip').textContent = free ? 'Free' : !z ? 'Enter your postcode' : ship == null ? 'RM [X]' : RF.rm(ship);
+    document.getElementById('tShip').textContent = !z ? 'Enter your postcode' : ship === 0 ? 'Free' : RF.rm(ship);
     document.getElementById('tTotal').textContent = RF.rm(sub + (ship || 0));
     var left = cfg && cfg.freeOver != null ? cfg.freeOver - sub : 0;
-    document.getElementById('freeNote').textContent = items.length && left > 0 ? 'Add ' + RF.rm(left) + ' more for free delivery.' : '';
+    document.getElementById('freeNote').textContent = items.length && left > 0 ? 'Add ' + RF.rm(left) + ' more for free delivery in Peninsular Malaysia' + (z === 'east' ? ' (RM8 to Sabah, Sarawak and Labuan)' : '') + '.' : '';
     payBtn.disabled = !items.length;
     payBtn.textContent = 'Pay ' + RF.rm(sub + (ship || 0)) + ' securely';
   }

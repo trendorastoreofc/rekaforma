@@ -15,7 +15,7 @@
   };
   /* display copies of shop-config.json; the server recalculates delivery itself */
   RF.FREE_OVER = 4500;
-  RF.SHIP = { west: 700, east: 1500 };
+  RF.SHIP = { west: 700, east: 1500, eastOver: 800 };
   RF.idFor = function (f) { return 'flower-' + f; };
   RF.img = function (id, view) { return 'assets/img/flower/' + RF.CATALOG[id].flower + '_' + (view || 'top') + '.webp'; };
   RF.rm = function (sen) { return 'RM' + (sen / 100).toFixed(sen % 100 ? 2 : 0); };
@@ -82,9 +82,9 @@
     body.innerHTML = items.map(function (l) { return RF.lineHTML(l, true); }).join('');
     var sub = RF.cart.subtotal(), left = RF.FREE_OVER - sub, pct = Math.min(100, Math.round(sub / RF.FREE_OVER * 100));
     foot.innerHTML =
-      '<div class="progress" role="status"><p>' + (left > 0 ? 'Add <b>' + RF.rm(left) + '</b> more for free delivery.' : 'Your order ships free.') + '</p>' +
+      '<div class="progress" role="status"><p>' + (left > 0 ? 'Add <b>' + RF.rm(left) + '</b> more for free delivery in Peninsular Malaysia.' : 'Free delivery in Peninsular Malaysia. RM8 to Sabah, Sarawak and Labuan.') + '</p>' +
       '<span class="bar" aria-hidden="true"><i style="width:' + pct + '%"></i></span></div>' +
-      '<dl class="totals"><dt>Subtotal</dt><dd>' + RF.rm(sub) + '</dd><dt class="small">Delivery</dt><dd class="small">' + (left > 0 ? 'From ' + RF.rm(RF.SHIP.west) + ', at checkout' : 'Free') + '</dd></dl>' +
+      '<dl class="totals"><dt>Subtotal</dt><dd>' + RF.rm(sub) + '</dd><dt class="small">Delivery</dt><dd class="small">' + (left > 0 ? 'From ' + RF.rm(RF.SHIP.west) + ', at checkout' : 'Free or RM8, at checkout') + '</dd></dl>' +
       '<a class="btn block" href="checkout.html">Checkout · ' + RF.rm(RF.cart.subtotal()) + '</a>' +
       '<div class="pays" aria-label="Payment methods"><span>FPX</span><span>Visa</span><span>Mastercard</span><span>GrabPay</span></div>';
     if (sub < RF.FREE_OVER) {

@@ -17,11 +17,13 @@
   "shipping": {
     "west": {
       "label": "Peninsular Malaysia",
-      "price": 700
+      "price": 700,
+      "priceOver": 0
     },
     "east": {
       "label": "Sabah, Sarawak and Labuan",
-      "price": 1500
+      "price": 1500,
+      "priceOver": 800
     }
   },
   "eastStates": [
@@ -29,6 +31,6 @@
     "Sarawak",
     "Labuan"
   ],
-  "_note": "Prices are in sen (1500 = RM15). Orders with a subtotal at or above freeOver ship free to every zone. Checkout refuses to run if a shipping price is null.",
+  "_note": "Prices are in sen (1500 = RM15). When the subtotal is at or above freeOver, each zone charges its priceOver instead of price (Peninsular free, East Malaysia RM8). Checkout refuses to run if a price is null.",
   "freeOver": 4500
 }

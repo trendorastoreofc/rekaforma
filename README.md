@@ -24,4 +24,6 @@ python3 -m http.server 8000
 4. In the Pages project settings add `STRIPE_SECRET_KEY` and `SITE_URL`.
 5. Test with a `sk_test_` key and Stripe's test FPX bank, then switch to the live key.
 
-Still to fill: weight, switch type, shipping days and policy, social links, and an email tool for the Photo Strip waitlist.
+Still to fill: two real photos. Save them as `assets/img/photos/hand.jpg` (the clicker in a hand) and `assets/img/photos/printing.jpg` (a printer mid-print), then replace the two `photo-slot` placeholders in `index.html` with `<img>` tags.
+
+Delivery rules live in `shop-config.json`: Peninsular RM7, free from RM45; Sabah, Sarawak and Labuan RM15, or RM8 from RM45.
