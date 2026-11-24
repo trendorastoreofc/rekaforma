@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div class="announce">Free delivery in Peninsular Malaysia over RM45 · Small batches, never restocked</div>
+<div class="announce">Series 01 is in bloom · Free delivery in Peninsular Malaysia over RM45</div>
 
 <header class="header">
   <div class="wrap">
@@ -61,7 +61,7 @@
 
     <div class="buy">
       <div>
-        <span class="label">Series 01</span>
+        <span class="label">Series 01 · In bloom</span>
         <h1>Flower Clicker</h1>
       </div>
       <div class="price" id="pPrice">RM15</div>
@@ -74,6 +74,7 @@
           <button type="button" data-f="sak" aria-pressed="false"><i style="background:#f4b6c8"></i>Sakura</button>
           <button type="button" data-f="dai" aria-pressed="false"><i style="background:#f4f1e8"></i>Daisy</button>
         </div>
+        <p class="meaning" id="pMeaning" aria-live="polite">Turns towards the light.</p>
       </div>
 
       <div class="qty-row">
@@ -85,7 +86,7 @@
         <button class="btn" type="button" id="addBtn">Add to bag · RM15</button>
       </div>
 
-      <p class="batch"><span class="label">Small batch</span>Series 01 is printed once, in a small batch. When it sells out, it will not be made again.</p>
+      <p class="batch"><span class="label">Blooms once</span>Series 01 is printed in a single small batch. When it sells out, the season ends and it will not be made again.</p>
 
       <ul class="assure">
         <li>Delivery RM7 in Peninsular Malaysia, free over RM45</li>
@@ -222,6 +223,7 @@
     if (FL.indexOf(f) < 0) return;
     state.f = f; var p = P();
     document.getElementById('optName').textContent = p.short;
+    document.getElementById('pMeaning').textContent = p.meaning;
     document.getElementById('stickyName').textContent = p.short;
     document.getElementById('crumbName').textContent = p.name;
     document.getElementById('pPrice').textContent = RF.rm(p.price);
@@ -301,7 +303,7 @@
       var a = document.createElement('article'); a.className = 'card';
       a.innerHTML = '<a class="media" href="#' + k + '" tabindex="-1" aria-hidden="true"><img class="main" src="assets/img/studio/card_' + k + '.webp" alt="" loading="lazy">' +
         '<img class="alt" src="assets/img/flower/' + k + '_top.webp" alt="" loading="lazy"></a>' +
-        '<div><div class="row"><h3><span class="dot" style="background:' + p.dot + '" aria-hidden="true"></span><a href="#' + k + '">' + p.short + '</a></h3><span class="price">' + RF.rm(p.price) + '</span></div><p>' + p.line + '</p></div>';
+        '<div><div class="row"><h3><span class="dot" style="background:' + p.dot + '" aria-hidden="true"></span><a href="#' + k + '">' + p.short + '</a></h3><span class="price">' + RF.rm(p.price) + '</span></div><p>' + p.meaning + '</p></div>';
       box.appendChild(a);
     });
   }

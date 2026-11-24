@@ -9,9 +9,9 @@
 
   var RF = window.RF = window.RF || {};
   RF.CATALOG = {
-    'flower-sun': { flower: 'sun', name: 'Flower Clicker, Sunflower', short: 'Sunflower', price: 1500, tint: '#dcd6cb', dot: '#f2b61c', line: 'Yellow petals, brown seed head, green band' },
-    'flower-sak': { flower: 'sak', name: 'Flower Clicker, Sakura', short: 'Sakura', price: 1500, tint: '#dcd6cb', dot: '#f4b6c8', line: 'Blush petals, deep pink centre, white band' },
-    'flower-dai': { flower: 'dai', name: 'Flower Clicker, Daisy', short: 'Daisy', price: 1500, tint: '#dcd6cb', dot: '#f4f1e8', line: 'White petals, yellow centre, green band' }
+    'flower-sun': { flower: 'sun', meaning: 'Turns towards the light.', name: 'Flower Clicker, Sunflower', short: 'Sunflower', price: 1500, tint: '#dcd6cb', dot: '#f2b61c', line: 'Yellow petals, brown seed head, green band' },
+    'flower-sak': { flower: 'sak', meaning: 'Here briefly, remembered long.', name: 'Flower Clicker, Sakura', short: 'Sakura', price: 1500, tint: '#dcd6cb', dot: '#f4b6c8', line: 'Blush petals, deep pink centre, white band' },
+    'flower-dai': { flower: 'dai', meaning: 'For new beginnings.', name: 'Flower Clicker, Daisy', short: 'Daisy', price: 1500, tint: '#dcd6cb', dot: '#f4f1e8', line: 'White petals, yellow centre, green band' }
   };
   /* display copies of shop-config.json; the server recalculates delivery itself */
   RF.FREE_OVER = 4500;
