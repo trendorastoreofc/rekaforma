@@ -426,3 +426,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 #detailFig img + img { transition-delay: 0s; }
 #detailFig.alt img:first-child { opacity: 0; transition-delay: 0s; }
 #detailFig.alt img + img { opacity: 1; transition-delay: .45s; }
+.split figure.wide-fig { aspect-ratio: 3 / 2; background: var(--stone); }
+.batch { margin: 0; padding: 14px 16px; background: var(--paper); font-size: 14px; color: var(--ink-2); display: grid; gap: 6px; }
+.batch .label { color: var(--brick); }
